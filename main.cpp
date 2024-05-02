@@ -11,8 +11,8 @@ public:
 
 //  virtual Sequence<T> *GetSubSequence (int startIndex, int endIndex) = 0;
   virtual Sequence<T> *Append (const T &item) = 0;
-//  virtual Sequence<T> *Prepend (const T &item) = 0;
-//  virtual Sequence<T> *InsertAt (const T &item, int index) = 0;
+  virtual Sequence<T> *Prepend (const T &item) = 0;
+  virtual Sequence<T> *InsertAt (const T &item, int index) = 0;
 //  virtual Sequence<T> *Concat (Sequence<T> &list) = 0;
 //  virtual T &operator[] (int index) = 0;
 };
@@ -217,16 +217,52 @@ public:
         return this;
     }
     
-    Vector<T>* vectorSum(const Vector<T> &vec1, const Vector<T> &vec2)
+    Vector<T>* Prepend(const T& item) override
     {
-        if (vec1.GetLength() != vec2.GetLength())
+        this->elements->Set(item, 0);
+        return this;
+    }
+    
+    Vector<T>* InsertAt(const T &item, int index) override
+    {
+        this->elements->Set(item, index);
+        return this;
+    }
+    
+    Vector<T>* vectorSum( const Vector<T> &vec2)
+    {
+        if (this->GetLength() != vec2.GetLength())
         {
             throw std::invalid_argument("different sizes");
         }
         Vector<T>* vecRes = new Vector();
-        for (int i = 0; i < vec1.GetLength(); i ++)
+        for (int i = 0; i < this->GetLength(); i ++)
         {
-            vecRes->Append(vec1.Get(i) + vec2.Get(i));
+            vecRes->Append(this->Get(i) + vec2.Get(i));
+        }
+        return vecRes;
+    }
+    
+    Vector<T>* vectorMultiOnScalar( const int elem)
+    {
+        Vector<T>* vecRes = new Vector();
+        for (int i = 0; i < this->GetLength(); i ++)
+        {
+            vecRes->Append(this->Get(i) * elem);
+        }
+        return vecRes;
+    }
+    
+    Vector<T>* vectorMulti( const Vector<T> &vec2)
+    {
+        if (this->GetLength() != vec2.GetLength())
+        {
+            throw std::invalid_argument("different sizes");
+        }
+        Vector<T>* vecRes = new Vector();
+        for (int i = 0; i < this->GetLength(); i ++)
+        {
+            vecRes->Append(this->Get(i) * vec2.Get(i));
         }
         return vecRes;
     }
@@ -239,7 +275,33 @@ void TestVectorSum()
     int c[] = {2, 4, 6, 8, 10};
     Vector<int> test1 (a, 5);
     Vector<int> test2 (b, 5);
-    Vector<int>* res = test1.vectorSum(test1, test2);
+    Vector<int>* res = test1.vectorSum(test2);
+    for (int i = 0; i < res->GetLength(); i++)
+    {
+        assert(res->Get(i) == c[i]);
+    }
+}
+
+void TestVectorMultiOnScalar()
+{
+    int a[] = {1, 2, 3, 4, 5};
+    int b[] = {2, 4, 6, 8, 10};
+    Vector<int> vec (a, 5);
+    Vector<int>* res = vec.vectorMultiOnScalar(2);
+    for (int i = 0; i < res->GetLength(); i++)
+    {
+        assert(res->Get(i) == b[i]);
+    }
+}
+
+void TestVectorMulti()
+{
+    int a[] = {1, 2, 3, 4, 5};
+    int b[] = {2, 4, 6, 8, 10};
+    int c[] = {2, 8, 18, 32, 50};
+    Vector<int> vec1 (a, 5);
+    Vector<int> vec2 (b, 5);
+    Vector<int>* res = vec1.vectorMulti(vec2);
     for (int i = 0; i < res->GetLength(); i++)
     {
         assert(res->Get(i) == c[i]);
@@ -248,5 +310,7 @@ void TestVectorSum()
 
 int main(int argc, const char * argv[]) {
     TestVectorSum();
+    TestVectorMultiOnScalar();
+    TestVectorMulti();
     return 0;
 }
