@@ -1,20 +1,20 @@
 #include <iostream>
-
+#include "assert.h"
 template <typename T> class Sequence
 {
 public:
-  virtual ~Sequence () {}
+//  virtual ~Sequence () {}
   virtual T GetFirst () = 0;
   virtual T GetLast () = 0;
   virtual T Get (int index) const = 0;
   virtual int GetLength () const = 0;
 
-  virtual Sequence<T> *GetSubSequence (int startIndex, int endIndex) = 0;
+//  virtual Sequence<T> *GetSubSequence (int startIndex, int endIndex) = 0;
   virtual Sequence<T> *Append (const T &item) = 0;
-  virtual Sequence<T> *Prepend (const T &item) = 0;
-  virtual Sequence<T> *InsertAt (const T &item, int index) = 0;
-  virtual Sequence<T> *Concat (Sequence<T> &list) = 0;
-  virtual T &operator[] (int index) = 0;
+//  virtual Sequence<T> *Prepend (const T &item) = 0;
+//  virtual Sequence<T> *InsertAt (const T &item, int index) = 0;
+//  virtual Sequence<T> *Concat (Sequence<T> &list) = 0;
+//  virtual T &operator[] (int index) = 0;
 };
 
 template <typename T> class DynamicArray
@@ -159,10 +159,10 @@ public:
   }
 };
 
-template <typename T> class Vector
+template <typename T> class Vector: public Sequence<T>
 {
 private:
-    DynamicArray<T> elements;
+    DynamicArray<T>* elements;
 public:
     Vector (){this->elements = new DynamicArray<T>();}
     
@@ -193,21 +193,60 @@ public:
         }
     }
     
-    T GetFirst()
+    T GetFirst() override
     {
         return this->elements->Get(0);
     }
-    T GetLast()
+    T GetLast() override
     {
-        return this->elements->Get(this->array->GetSize() - 1);
+        return this->elements->Get(this->elements->GetSize() - 1);
     }
-    T Get (int index) const override
+    T Get(int index) const override
     {
         return this->elements->Get(index);
     }
+    
+    int GetLength() const override
+    {
+        return this->elements->GetSize();
+    }
+    
+    Vector<T>* Append(const T& item) override
+    {
+        this->elements->Set(item, elements->GetSize());
+        return this;
+    }
+    
+    Vector<T>* vectorSum(const Vector<T> &vec1, const Vector<T> &vec2)
+    {
+        if (vec1.GetLength() != vec2.GetLength())
+        {
+            throw std::invalid_argument("different sizes");
+        }
+        Vector<T>* vecRes = new Vector();
+        for (int i = 0; i < vec1.GetLength(); i ++)
+        {
+            vecRes->Append(vec1.Get(i) + vec2.Get(i));
+        }
+        return vecRes;
+    }
 };
 
+void TestVectorSum()
+{
+    int a[] = {1, 2, 3, 4, 5};
+    int b[] = {1, 2, 3, 4, 5};
+    int c[] = {2, 4, 6, 8, 10};
+    Vector<int> test1 (a, 5);
+    Vector<int> test2 (b, 5);
+    Vector<int>* res = test1.vectorSum(test1, test2);
+    for (int i = 0; i < res->GetLength(); i++)
+    {
+        assert(res->Get(i) == c[i]);
+    }
+}
+
 int main(int argc, const char * argv[]) {
-    
+    TestVectorSum();
     return 0;
 }
