@@ -653,6 +653,50 @@ public:
         }
     }
     
+    bool IsStackEmpty()
+    {
+        if (this->GetSize() <= 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    
+    bool IsSubSequenceHere(Stack<T> stack)
+    {
+        if(this->GetSize() < stack.GetSize())
+        {
+            return false;
+        }
+        bool flag = false;
+        for (int i = 0; i < this->GetSize() - stack.GetSize(); i++)
+        {
+            flag = true;
+            int j;
+            j = 0;
+            while (j < stack.GetSize() && flag == true)
+            {
+                if (this->ShowElement(i + j) == stack.ShowElement(j))
+                {
+                    flag = true;
+                }
+                else
+                {
+                    flag = false;
+                }
+                j++;
+            }
+            if (flag == true)
+            {
+                break;
+            }
+        }
+        return flag;
+    }
+    
     T GetSize()
     {
         return elements->GetLength();
@@ -776,13 +820,28 @@ void TestStackGetSubStack()
     }
 }
 
+void TestStackIsSubSequenceHere()
+{
+    int a[] = {1, 2, 3, 4, 5, 6, 7, 8};
+    int b[] = {1, 2, 3, 4, 5};
+    int c[] = {5, 4, 3, 2, 1};
+    Stack<int> test1(a, 8);
+    Stack<int> test2(b, 5);
+    Stack<int> test3(c, 5);
+    bool result1 = test1.IsSubSequenceHere(test2);
+    assert(result1 == true);
+    bool result2 = test1.IsSubSequenceHere(test3);
+    assert(result2 == false);
+}
+
 int main(int argc, const char * argv[]) {
-//    TestVectorSum();
-//    TestVectorMultiOnScalar();
-//    TestVectorMulti();
-//    TestStackPush();
-//    TestStackConstructors();
-//    TestStackConcat();
+    TestVectorSum();
+    TestVectorMultiOnScalar();
+    TestVectorMulti();
+    TestStackPush();
+    TestStackConstructors();
+    TestStackConcat();
     TestStackGetSubStack();
+    TestStackIsSubSequenceHere();
     return 0;
 }
