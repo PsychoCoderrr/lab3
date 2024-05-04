@@ -166,8 +166,6 @@ private:
 public:
     Vector (){this->elements = new DynamicArray<T>();}
     
-    Vector (int count) {this->elements = new DynamicArray<T>(count);}
-    
     Vector (T *items, int count)
     {
       this->elements = new DynamicArray<T> (items, count);
@@ -211,45 +209,31 @@ public:
         return this->elements->GetSize();
     }
     
-    Vector<T>* Append(const T& item)
-    {
-        this->elements->Set(item, elements->GetSize());
-        return this;
-    }
-    
-    Vector<T>* Prepend(const T& item)
-    {
-        this->elements->Set(item, 0);
-        return this;
-    }
-    
-    Vector<T>* InsertAt(const T &item, int index)
-    {
-        this->elements->Set(item, index);
-        return this;
-    }
-    
     Vector<T>* vectorSum( const Vector<T> &vec2)
     {
         if (this->GetLength() != vec2.GetLength())
         {
             throw std::invalid_argument("different sizes");
         }
-        Vector<T>* vecRes = new Vector();
+        T* intermediate = new T[this->GetLength()];
+        
         for (int i = 0; i < this->GetLength(); i ++)
         {
-            vecRes->Append(this->Get(i) + vec2.Get(i));
+            intermediate[i] = this->Get(i) + vec2.Get(i);
         }
+        Vector<T>* vecRes = new Vector(intermediate, this->GetLength());
         return vecRes;
     }
     
     Vector<T>* vectorMultiOnScalar( const int elem)
     {
-        Vector<T>* vecRes = new Vector();
+        T* intermediate = new T[this->GetLength()];
+        
         for (int i = 0; i < this->GetLength(); i ++)
         {
-            vecRes->Append(this->Get(i) * elem);
+            intermediate[i] = this->Get(i) * elem;
         }
+        Vector<T>* vecRes = new Vector(intermediate, this->GetLength());
         return vecRes;
     }
     
@@ -259,11 +243,13 @@ public:
         {
             throw std::invalid_argument("different sizes");
         }
-        Vector<T>* vecRes = new Vector();
+        T* intermediate = new T[this->GetLength()];
+        
         for (int i = 0; i < this->GetLength(); i ++)
         {
-            vecRes->Append(this->Get(i) * vec2.Get(i));
+            intermediate[i] = this->Get(i) * vec2.Get(i);
         }
+        Vector<T>* vecRes = new Vector(intermediate, this->GetLength());
         return vecRes;
     }
     
