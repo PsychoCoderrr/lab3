@@ -657,6 +657,22 @@ public:
     {
         return elements->GetLength();
     }
+    
+    Stack<T>* Concat (Stack<T>& stack)
+    {
+        for (int i = 0; i < stack.GetSize(); i++)
+        {
+            elements->Append(stack.ShowElement(i));
+        }
+        return this;
+    }
+    
+    Stack<T>* GetSubStack (int startIndex, int endIndex)
+    {
+        Stack<T>* resultStack = new Stack<T>();
+        resultStack->elements = elements->GetSubSequence(startIndex, endIndex);
+        return resultStack;
+    }
 };
 
 void TestVectorSum()
@@ -729,11 +745,44 @@ void TestStackPush()
         assert(test->ShowElement(i) == b[i]);
     }
 }
+
+void TestStackConcat()
+{
+    int a[] = {1, 2, 3, 4};
+    int b[] = {5, 6, 7, 8};
+    int ab[] = {1, 2, 3, 4, 5, 6, 7, 8};
+    Stack<int> test1(a, 4);
+    assert(test1.GetSize() == 4);
+    Stack<int> test2(b, 4);
+    assert(test2.GetSize() == 4);
+    Stack<int>* test3 = test1.Concat(test2);
+    assert(test3->GetSize() == 8);
+    for (int i = 0; i < test3->GetSize(); i++)
+    {
+        assert(test3->ShowElement(i) == ab[i]);
+    }
+}
+
+void TestStackGetSubStack()
+{
+    int a[] = {1, 2, 3, 4, 5, 6, 7, 8};
+    int b[] = {1, 2, 3, 4, 5};
+    Stack<int> test1(a, 8);
+    assert(test1.GetSize() == 8);
+    Stack<int>* test2 = test1.GetSubStack(1, 5);
+    for (int i = 0; i < test2->GetSize(); i++)
+    {
+        assert(test2->ShowElement(i) == b[i]);
+    }
+}
+
 int main(int argc, const char * argv[]) {
-    TestVectorSum();
-    TestVectorMultiOnScalar();
-    TestVectorMulti();
-    TestStackPush();
-    TestStackConstructors();
+//    TestVectorSum();
+//    TestVectorMultiOnScalar();
+//    TestVectorMulti();
+//    TestStackPush();
+//    TestStackConstructors();
+//    TestStackConcat();
+    TestStackGetSubStack();
     return 0;
 }
