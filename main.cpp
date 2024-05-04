@@ -159,6 +159,349 @@ public:
   }
 };
 
+template <typename T> struct TheNode
+{
+  TheNode (T value) : data (value), next (nullptr) {}
+  T data;
+  TheNode<T> *next = nullptr;
+};
+
+template <typename T> class LinkedList
+{
+private:
+  int size;
+  TheNode<T> *head;
+
+public:
+  LinkedList (T *items, int count) : size (0), head (nullptr)
+  {
+    if (count < 0)
+      {
+        throw std::invalid_argument ("invalid argument");
+      }
+    for (int i = 0; i < count; i++)
+      {
+        Append (items[i]);
+      }
+  }
+
+  LinkedList () : size (0), head (nullptr) {}
+
+  LinkedList (const LinkedList<T> &list) : LinkedList ()
+  {
+    TheNode<T> *intermediate = list.head;
+    for (int i = 0; i < list.size; i++)
+      {
+        Append (intermediate->data);
+        intermediate = intermediate->next;
+      }
+    this->size = list.size;
+  }
+
+  virtual ~LinkedList ()
+  {
+    if (head != nullptr)
+      {
+        TheNode<T> *current = head;
+        TheNode<T> *buf;
+        for (int i = 0; i < this->size; i++)
+          {
+            buf = current->next;
+            delete current;
+            current = buf;
+          }
+        delete current;
+      }
+  }
+
+  T
+  GetFirst ()
+  {
+    if (head == nullptr)
+      {
+        throw std::invalid_argument ("index out of range");
+      }
+    return head->data;
+  }
+
+  T
+  GetLast ()
+  {
+    if (head == nullptr)
+      {
+        throw std::invalid_argument ("index out of range");
+      }
+    TheNode<T> *intermediate = head;
+    for (int i = 0; i < this->size - 1; i++)
+      {
+        intermediate = intermediate->next;
+      }
+    return intermediate->data;
+  }
+
+  T
+  Get (int index)
+  {
+    if (index < 0 || index >= this->size)
+      {
+        throw std::invalid_argument ("index out of range");
+      }
+    TheNode<T> *intermediate = head;
+    for (int i = 0; i < index; i++)
+      {
+        intermediate = intermediate->next;
+      }
+    return intermediate->data;
+  }
+
+  LinkedList<T> *
+  GetSubList (int startIndex, int endIndex)
+  {
+    if (startIndex < 0 || endIndex < 0 || startIndex > endIndex
+        || endIndex >= size)
+      {
+        throw std::invalid_argument ("index out of range");
+      }
+    LinkedList<T> *ResultList = new LinkedList ();
+    TheNode<T> *intermediate = head;
+    for (int i = 0; i < startIndex; i++)
+      {
+        intermediate = intermediate->next;
+      }
+    for (int i = startIndex; i < endIndex; i++)
+      {
+        ResultList->Append (intermediate->data);
+        intermediate = intermediate->next;
+      }
+    return ResultList;
+  }
+
+  int
+  GetLength ()
+  {
+    return this->size;
+  }
+
+  void
+  Append (const T &item)
+  {
+    if (head == nullptr)
+      {
+        TheNode<T> *buf = new TheNode<T> (item);
+        this->head = buf;
+        size++;
+      }
+    else
+      {
+        TheNode<T> *buf = new TheNode<T> (item);
+        TheNode<T> *intermediate = head;
+        for (int i = 0; i < this->size - 1; i++)
+          {
+            intermediate = intermediate->next;
+          }
+        intermediate->next = buf;
+        this->size++;
+      }
+  }
+
+  void
+  Prepend (const T &item)
+  {
+    TheNode<T> *buf = new TheNode<T> (item);
+    buf->next = head;
+    head = buf;
+    this->size++;
+  }
+
+  void
+  InsertAt (T item, int index)
+  {
+    if (index < 0 || index >= this->size)
+      {
+        throw std::invalid_argument ("index out of range");
+      }
+    TheNode<T> *newElem = new TheNode<T> (item);
+    TheNode<T> *intermediate = head;
+    for (int i = 0; i < index - 1; i++)
+      {
+        intermediate = intermediate->next;
+      }
+    newElem->next = intermediate->next;
+    intermediate->next = newElem;
+    this->size++;
+  }
+
+  LinkedList<T> *
+  Concat (LinkedList<T> &list)
+  {
+    LinkedList<T> *resultList = new LinkedList<T> ();
+    for (int i = 0; i < this->size; i++)
+      {
+        resultList->Append (this->Get (i));
+      }
+    TheNode<T> *intermediate = list.head;
+    for (int i = 0; i < list.size; i++)
+      {
+        resultList->Append (intermediate->data);
+        intermediate = intermediate->next;
+      }
+    return resultList;
+  }
+
+  T &
+  operator[] (int index)
+  {
+    if (index > this->size || index < 0)
+      {
+        throw std::invalid_argument ("index out of range");
+      }
+    TheNode<T> *intermediate = head;
+    for (int i = 0; i < index; i++)
+      {
+        intermediate = intermediate->next;
+      }
+    return intermediate->data;
+  }
+};
+
+template <typename T> class ListSequence : public Sequence<T>
+{
+protected:
+  virtual ListSequence<T> *Instance () = 0;
+  LinkedList<T> *list;
+
+  ListSequence<T> *
+  appendWithoutInstance (const T &item)
+  {
+    ListSequence<T> *result = this;
+    result->list->Append (item);
+    return result;
+  }
+
+public:
+  ListSequence () { this->list = new LinkedList<T> (); }
+  ListSequence (T *items, int count)
+  {
+    this->list = new LinkedList<T> (items, count);
+  }
+  ListSequence (const Sequence<T> &seq)
+  {
+    this->list = new LinkedList<T> ();
+    for (int i = 0; i < seq.GetLength (); i++)
+      {
+        appendWithoutInstance (seq.Get (i));
+      }
+  }
+
+  ListSequence (const ListSequence<T> &seq)
+  {
+    this->list = new LinkedList<T> ();
+    for (int i = 0; i < seq.GetLength (); i++)
+      {
+        appendWithoutInstance (seq.Get (i));
+      }
+  }
+
+  T
+  GetFirst () override
+  {
+    return this->list->GetFirst ();
+  }
+
+  T
+  GetLast () override
+  {
+    return this->list->GetLast ();
+  }
+
+  T
+  Get (int index) const override
+  {
+    return this->list->Get (index);
+  }
+
+  int
+  GetLength () const override
+  {
+    return this->list->GetLength ();
+  }
+
+  ListSequence<T> *
+  Append (const T &item) override
+  {
+    ListSequence<T> *result = Instance ();
+    result->list->Append (item);
+    return result;
+  }
+
+  ListSequence<T> *
+  Prepend (const T &item) override
+  {
+    ListSequence<T> *result = Instance ();
+    result->list->Prepend (item);
+    return result;
+  }
+
+  ListSequence<T> *
+  InsertAt (const T &item, int index) override
+  {
+    ListSequence<T> *result = Instance ();
+    result->list->InsertAt (item, index);
+    return result;
+  }
+
+  T &
+  operator[] (int index) override
+  {
+    return (*(this->list))[index];
+  }
+
+  ~ListSequence () { delete list; }
+};
+
+template <typename T> class MutableListSequence : public ListSequence<T>
+{
+private:
+  ListSequence<T> *
+  Instance () override
+  {
+    return static_cast<ListSequence<T> *> (this);
+  }
+
+public:
+  using ListSequence<T>::ListSequence;
+
+  MutableListSequence<T> *
+  Concat (Sequence<T> &elements) override
+  {
+    MutableListSequence<T> *result
+        = new MutableListSequence<T> (static_cast<Sequence<T> &> (*this));
+    for (int i = 0; i < elements.GetLength (); i++)
+      {
+        result->Append (elements.Get (i));
+      }
+    return result;
+  }
+  MutableListSequence<T> *
+  GetSubSequence (int startIndex, int endIndex) override
+  {
+    if (startIndex < 0 || endIndex < startIndex
+        || endIndex >= this->GetLength ())
+      {
+        throw std::invalid_argument ("invalid argument");
+      }
+    T *intermediate = new T[endIndex - startIndex + 1];
+    for (int i = 0; i < endIndex - startIndex + 1; i++)
+      {
+        intermediate[i] = this->Get (startIndex + i - 1);
+      }
+    MutableListSequence<T> *result
+        = new MutableListSequence<T> (intermediate, endIndex - startIndex + 1);
+    delete[] intermediate;
+    return result;
+  }
+};
+
 template <typename T> class Vector
 {
 private:
@@ -256,6 +599,66 @@ public:
     virtual ~Vector () { delete elements; }
 };
 
+template <typename T>
+class Stack
+{
+private:
+    MutableListSequence<T>* elements;
+public:
+    Stack()
+    {
+        elements = new MutableListSequence<T>();
+    }
+    
+    Stack(T* array, int count)
+    {
+        elements = new MutableListSequence<T>(array, count);
+    }
+    
+    Stack(Stack<T>& StackForCopy)
+    {
+        elements = new MutableListSequence<T>();
+        for (int i = 0; i < StackForCopy.elements->GetLength(); i++)
+        {
+            elements->Append(StackForCopy.elements->Get(i));
+        }
+    }
+    
+    ~Stack()
+    {
+        delete elements;
+    }
+    
+    void push(const T& item)
+    {
+        this->elements->Prepend(item);
+    }
+    
+    T pop() // удаление элемента из стека с его получением
+    {
+        T result = elements->GetFirst();
+        elements = elements->GetSubSequence(1, elements->GetLength());
+    }
+    
+    T ShowElement (int index)
+    {
+        return elements->Get(index);
+    }
+    
+    void StackShow()
+    {
+        for (int i = 0; i < this->GetSize(); i++)
+        {
+            std::cout << this->ShowElement(i) << std::endl;
+        }
+    }
+    
+    T GetSize()
+    {
+        return elements->GetLength();
+    }
+};
+
 void TestVectorSum()
 {
     int a[] = {1, 2, 3, 4, 5};
@@ -296,9 +699,41 @@ void TestVectorMulti()
     }
 }
 
+void TestStackConstructors()
+{
+    int a[] = {1, 2, 3, 4};
+    Stack<int> test1 (a, 4);
+    assert(test1.GetSize() == 4);
+    for (int i = 0; i < test1.GetSize(); i++)
+    {
+        assert(test1.ShowElement(i) == a[i]);
+    }
+    
+    Stack<int> test2 (test1);
+    for (int i = 0; i < test1.GetSize(); i++)
+    {
+        assert(test1.ShowElement(i) == test2.ShowElement(i));
+    }
+}
+
+void TestStackPush()
+{
+    int a[] = {1, 2, 3, 4};
+    int b[] = {5, 1, 2, 3, 4};
+    Stack<int>* test = new Stack<int>(a, 4);
+    assert(test->GetSize() == 4);
+    test->push(5);
+    assert(test->GetSize() == 5);
+    for (int i = 0; i < test->GetSize(); i++)
+    {
+        assert(test->ShowElement(i) == b[i]);
+    }
+}
 int main(int argc, const char * argv[]) {
     TestVectorSum();
     TestVectorMultiOnScalar();
     TestVectorMulti();
+    TestStackPush();
+    TestStackConstructors();
     return 0;
 }
