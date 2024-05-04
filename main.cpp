@@ -3,18 +3,18 @@
 template <typename T> class Sequence
 {
 public:
-//  virtual ~Sequence () {}
+  virtual ~Sequence () {}
   virtual T GetFirst () = 0;
   virtual T GetLast () = 0;
   virtual T Get (int index) const = 0;
   virtual int GetLength () const = 0;
 
-//  virtual Sequence<T> *GetSubSequence (int startIndex, int endIndex) = 0;
+  virtual Sequence<T> *GetSubSequence (int startIndex, int endIndex) = 0;
   virtual Sequence<T> *Append (const T &item) = 0;
   virtual Sequence<T> *Prepend (const T &item) = 0;
   virtual Sequence<T> *InsertAt (const T &item, int index) = 0;
-//  virtual Sequence<T> *Concat (Sequence<T> &list) = 0;
-//  virtual T &operator[] (int index) = 0;
+  virtual Sequence<T> *Concat (Sequence<T> &list) = 0;
+  virtual T &operator[] (int index) = 0;
 };
 
 template <typename T> class DynamicArray
@@ -159,7 +159,7 @@ public:
   }
 };
 
-template <typename T> class Vector: public Sequence<T>
+template <typename T> class Vector
 {
 private:
     DynamicArray<T>* elements;
@@ -193,37 +193,37 @@ public:
         }
     }
     
-    T GetFirst() override
+    T GetFirst()
     {
         return this->elements->Get(0);
     }
-    T GetLast() override
+    T GetLast()
     {
         return this->elements->Get(this->elements->GetSize() - 1);
     }
-    T Get(int index) const override
+    T Get(int index) const
     {
         return this->elements->Get(index);
     }
     
-    int GetLength() const override
+    int GetLength() const
     {
         return this->elements->GetSize();
     }
     
-    Vector<T>* Append(const T& item) override
+    Vector<T>* Append(const T& item)
     {
         this->elements->Set(item, elements->GetSize());
         return this;
     }
     
-    Vector<T>* Prepend(const T& item) override
+    Vector<T>* Prepend(const T& item)
     {
         this->elements->Set(item, 0);
         return this;
     }
     
-    Vector<T>* InsertAt(const T &item, int index) override
+    Vector<T>* InsertAt(const T &item, int index)
     {
         this->elements->Set(item, index);
         return this;
@@ -266,6 +266,8 @@ public:
         }
         return vecRes;
     }
+    
+    virtual ~Vector () { delete elements; }
 };
 
 void TestVectorSum()
