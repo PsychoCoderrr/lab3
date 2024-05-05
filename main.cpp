@@ -810,6 +810,96 @@ public:
         }
         return flag;
     }
+    
+    Queue<T>* Concat (Queue<T>& queue)
+    {
+        for (int i = 0; i < queue.GetSize(); i++)
+        {
+            elements->Append(queue.ShowElement(i));
+        }
+        return this;
+    }
+    
+    Queue<T>* GetSubQueue (int startIndex, int endIndex)
+    {
+        Queue<T>* resultQueue = new Queue<T>();
+        resultQueue->elements = elements->GetSubSequence(startIndex, endIndex);
+        return resultQueue;
+    }
+};
+
+class complex
+{
+private:
+    double Re;
+    double Im;
+public:
+    complex()
+    {
+        Re = 0;
+        Im = 0;
+    }
+    
+    complex(double real, double image)
+    {
+        Re = real;
+        Im = image;
+    }
+    
+    complex(const complex& itemForCopy)
+    {
+        Re = itemForCopy.Re;
+        Im = itemForCopy.Im;
+    }
+    
+    complex operator + (complex item)
+    {
+        this->Re = this->Re + item.Re;
+        this->Im = this->Im + item.Im;
+        return *this;
+    }
+    
+    complex operator - (complex item)
+    {
+        this->Re = this->Re - item.Re;
+        this->Im = this->Im - item.Im;
+        return *this;
+    }
+    
+    complex operator * (complex& item)
+    {
+        this->Re = (this->Re) * item.Re - (this->Im) * item.Im;
+        this->Im = (this->Re) * item.Im + (this->Im) * item.Re;
+        return *this;
+    }
+    
+    complex operator / (complex item)
+    {
+        this->Re = ((this->Re) * item.Re + (this->Im) * item.Im) / ((item.Re) * (item.Re) + item.Im * item.Im);
+        this->Im = ((this->Im) * item.Re - (this->Re) * item.Im) / ((item.Re) * (item.Re) + item.Im * item.Im);
+        return *this;
+    }
+    
+    friend std::istream& operator >>(std::istream& in, complex& item)
+    {
+        std::cout << "Enter real part of complex number ";
+        in >> item.Re;
+        std::cout << "Enter image part of complex number ";
+        in >> item.Im;
+        return in;
+    }
+    
+    friend std::ostream& operator << (std::ostream& out, const complex& item)
+    {
+        if (item.Im < 0)
+        {
+            return out << item.Re << "+i" << item.Im << ")" << std::endl;
+        }
+        else
+        {
+            return out << item.Re << "+i" << item.Im << std::endl;
+        }
+    }
 };
 
 void TestVectorSum()
@@ -991,18 +1081,21 @@ void TestQueueIsSubSequenceHere()
 }
 
 int main(int argc, const char * argv[]) {
-    TestVectorSum();
-    TestVectorMultiOnScalar();
-    TestVectorMulti();
-    TestStackPush();
-    TestStackConstructors();
-    TestStackConcat();
-    TestStackGetSubStack();
-    TestStackIsSubSequenceHere();
-    TestStackPop();
-    TestQueueCostructors();
-    TestQueuePush();
-    TestQueuePop();
-    TestQueueIsSubSequenceHere();
+//    TestVectorSum();
+//    TestVectorMultiOnScalar();
+//    TestVectorMulti();
+//    TestStackPush();
+//    TestStackConstructors();
+//    TestStackConcat();
+//    TestStackGetSubStack();
+//    TestStackIsSubSequenceHere();
+//    TestStackPop();
+//    TestQueueCostructors();
+//    TestQueuePush();
+//    TestQueuePop();
+//    TestQueueIsSubSequenceHere();
+    complex test;
+    std::cin >> test;
+    std::cout << test;
     return 0;
 }
