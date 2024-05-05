@@ -735,7 +735,7 @@ public:
         elements = new MutableListSequence<T>(array, count);
     }
     
-    Queue(Stack<T>& QueueForCopy)
+    Queue(Queue<T>& QueueForCopy)
     {
         elements = new MutableListSequence<T>();
         for (int i = 0; i < QueueForCopy.elements->GetLength(); i++)
@@ -757,7 +757,18 @@ public:
     T pop() // удаление элемента из стека с его получением
     {
         T result = elements->GetLast();
-        elements = elements->GetSubSequence(0, elements->GetLength()-1);
+        elements = elements->GetSubSequence(0, elements->GetLength()-2);
+        return result;
+    }
+    
+    T GetSize()
+    {
+        return elements->GetLength();
+    }
+    
+    T ShowElement (int index)
+    {
+        return elements->Get(index);
     }
     
 };
@@ -886,6 +897,37 @@ void TestStackIsSubSequenceHere()
     assert(result2 == false);
 }
 
+void TestQueueCostructors()
+{
+    int a[] = {1, 2, 3, 4};
+    Queue<int> test1 (a, 4);
+    assert(test1.GetSize() == 4);
+    for (int i = 0; i < test1.GetSize(); i++)
+    {
+        assert(test1.ShowElement(i) == a[i]);
+    }
+    
+    Queue<int> test2 (test1);
+    for (int i = 0; i < test1.GetSize(); i++)
+    {
+        assert(test1.ShowElement(i) == test2.ShowElement(i));
+    }
+}
+
+void TestQueuePush()
+{
+    int a[] = {1, 2, 3, 4};
+    int b[] = {5, 1, 2, 3, 4};
+    Queue<int>* test = new Queue<int>(a, 4);
+    assert(test->GetSize() == 4);
+    test->push(5);
+    assert(test->GetSize() == 5);
+    for (int i = 0; i < test->GetSize(); i++)
+    {
+        assert(test->ShowElement(i) == b[i]);
+    }
+}
+
 int main(int argc, const char * argv[]) {
     TestVectorSum();
     TestVectorMultiOnScalar();
@@ -896,5 +938,7 @@ int main(int argc, const char * argv[]) {
     TestStackGetSubStack();
     TestStackIsSubSequenceHere();
     TestStackPop();
+    TestQueueCostructors();
+    TestQueuePush();
     return 0;
 }
