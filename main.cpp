@@ -751,13 +751,13 @@ public:
     
     void push(const T& item)
     {
-        this->elements->Prepend(item);
+        this->elements->Append(item);
     }
     
-    T pop() // удаление элемента из стека с его получением
+    T pop() // удаление элемента из очереди с его получением
     {
         T result = elements->GetLast();
-        elements = elements->GetSubSequence(0, elements->GetLength()-2);
+        elements = elements->GetSubSequence(1, elements->GetLength() - 1);
         return result;
     }
     
@@ -771,6 +771,45 @@ public:
         return elements->Get(index);
     }
     
+    void QueueShow()
+    {
+        for (int i = 0; i < this->GetSize(); i++)
+        {
+            std::cout << this->ShowElement(i) << std::endl;
+        }
+    }
+    
+    bool IsSubSequenceHere(Queue<T> queue)
+    {
+        if(this->GetSize() < queue.GetSize())
+        {
+            return false;
+        }
+        bool flag = false;
+        for (int i = 0; i < this->GetSize() - queue.GetSize(); i++)
+        {
+            flag = true;
+            int j;
+            j = 0;
+            while (j < queue.GetSize() && flag == true)
+            {
+                if (this->ShowElement(i + j) == queue.ShowElement(j))
+                {
+                    flag = true;
+                }
+                else
+                {
+                    flag = false;
+                }
+                j++;
+            }
+            if (flag == true)
+            {
+                break;
+            }
+        }
+        return flag;
+    }
 };
 
 void TestVectorSum()
@@ -917,7 +956,7 @@ void TestQueueCostructors()
 void TestQueuePush()
 {
     int a[] = {1, 2, 3, 4};
-    int b[] = {5, 1, 2, 3, 4};
+    int b[] = { 1, 2, 3, 4, 5};
     Queue<int>* test = new Queue<int>(a, 4);
     assert(test->GetSize() == 4);
     test->push(5);
@@ -926,6 +965,29 @@ void TestQueuePush()
     {
         assert(test->ShowElement(i) == b[i]);
     }
+}
+
+void TestQueuePop()
+{
+    int a[] = {1, 2, 3, 4};
+    Queue<int> test(a, 4);
+    int result = test.pop();
+    assert(result == 4);
+    assert(test.GetSize() == 3);
+}
+
+void TestQueueIsSubSequenceHere()
+{
+    int a[] = {1, 2, 3, 4, 5, 6, 7, 8};
+    int b[] = {1, 2, 3, 4, 5};
+    int c[] = {5, 4, 3, 2, 1};
+    Queue<int> test1(a, 8);
+    Queue<int> test2(b, 5);
+    Queue<int> test3(c, 5);
+    bool result1 = test1.IsSubSequenceHere(test2);
+    assert(result1 == true);
+    bool result2 = test1.IsSubSequenceHere(test3);
+    assert(result2 == false);
 }
 
 int main(int argc, const char * argv[]) {
@@ -940,5 +1002,7 @@ int main(int argc, const char * argv[]) {
     TestStackPop();
     TestQueueCostructors();
     TestQueuePush();
+    TestQueuePop();
+    TestQueueIsSubSequenceHere();
     return 0;
 }
