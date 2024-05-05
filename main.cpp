@@ -637,7 +637,8 @@ public:
     T pop() // удаление элемента из стека с его получением
     {
         T result = elements->GetFirst();
-        elements = elements->GetSubSequence(1, elements->GetLength());
+        elements = elements->GetSubSequence(1, elements->GetLength() - 1);
+        return result;
     }
     
     T ShowElement (int index)
@@ -719,6 +720,48 @@ public:
     }
 };
 
+template <typename T> class Queue
+{
+private:
+    MutableListSequence<T>* elements;
+public:
+    Queue()
+    {
+        elements = new MutableListSequence<T>();
+    }
+    
+    Queue(T* array, int count)
+    {
+        elements = new MutableListSequence<T>(array, count);
+    }
+    
+    Queue(Stack<T>& QueueForCopy)
+    {
+        elements = new MutableListSequence<T>();
+        for (int i = 0; i < QueueForCopy.elements->GetLength(); i++)
+        {
+            elements->Append(QueueForCopy.elements->Get(i));
+        }
+    }
+    
+    ~Queue()
+    {
+        delete elements;
+    }
+    
+    void push(const T& item)
+    {
+        this->elements->Prepend(item);
+    }
+    
+    T pop() // удаление элемента из стека с его получением
+    {
+        T result = elements->GetLast();
+        elements = elements->GetSubSequence(0, elements->GetLength()-1);
+    }
+    
+};
+
 void TestVectorSum()
 {
     int a[] = {1, 2, 3, 4, 5};
@@ -790,6 +833,15 @@ void TestStackPush()
     }
 }
 
+void TestStackPop()
+{
+    int a[] = {1, 2, 3, 4};
+    Stack<int> test(a, 4);
+    int result = test.pop();
+    assert(result == 1);
+    assert(test.GetSize() == 3);
+}
+
 void TestStackConcat()
 {
     int a[] = {1, 2, 3, 4};
@@ -843,5 +895,6 @@ int main(int argc, const char * argv[]) {
     TestStackConcat();
     TestStackGetSubStack();
     TestStackIsSubSequenceHere();
+    TestStackPop();
     return 0;
 }
