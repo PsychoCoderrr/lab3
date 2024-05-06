@@ -852,32 +852,50 @@ public:
         Im = itemForCopy.Im;
     }
     
+    double GetRe ()
+    {
+        return Re;
+    }
+    
+    double GetIm ()
+    {
+        return Im;
+    }
+    
     complex operator + (complex item)
     {
-        this->Re = this->Re + item.Re;
-        this->Im = this->Im + item.Im;
-        return *this;
+        double real = this->Re + item.Re;
+        double image = this->Im + item.Im;
+        complex result(real, image);
+        return result;
     }
     
     complex operator - (complex item)
     {
-        this->Re = this->Re - item.Re;
-        this->Im = this->Im - item.Im;
-        return *this;
+        double real = this->Re - item.Re;
+        double image = this->Im - item.Im;
+        complex result(real, image);
+        return result;
     }
     
     complex operator * (complex& item)
     {
-        this->Re = (this->Re) * item.Re - (this->Im) * item.Im;
-        this->Im = (this->Re) * item.Im + (this->Im) * item.Re;
-        return *this;
+        double real = this->Re;
+        double image = this->Im;
+        double realRes = real * item.Re - image * item.Im;
+        double imageRes = real * item.Im + image * item.Re;
+        complex result(realRes, imageRes);
+        return result;
     }
     
     complex operator / (complex item)
     {
-        this->Re = ((this->Re) * item.Re + (this->Im) * item.Im) / ((item.Re) * (item.Re) + item.Im * item.Im);
-        this->Im = ((this->Im) * item.Re - (this->Re) * item.Im) / ((item.Re) * (item.Re) + item.Im * item.Im);
-        return *this;
+        double real = this->Re;
+        double image = this->Im;
+        double realRes = (real * item.Re + image * item.Im) / ((item.Re * (item.Re)) + item.Im * item.Im);
+        double imageRes = (image * item.Re - real * item.Im) / ((item.Re * (item.Re)) + item.Im * item.Im);
+        complex result(realRes, imageRes);
+        return result;
     }
     
     friend std::istream& operator >>(std::istream& in, complex& item)
@@ -898,6 +916,64 @@ public:
         else
         {
             return out << item.Re << "+i" << item.Im << std::endl;
+        }
+    }
+    
+    complex& operator +=(complex item)
+    {
+        this->Re += item.Re;
+        this->Im += item.Im;
+        return *this;
+    }
+    
+    complex& operator -=(complex item)
+    {
+        double real = this->Re;
+        double image = this->Im;
+        this->Re = real - item.Re;
+        this->Im = image - item.Im;
+        return *this;
+    }
+    
+    complex& operator *=(complex item)
+    {
+        double real = this->Re;
+        double image = this->Im;
+        this->Re = real * item.Re - image * item.Im;
+        this->Im = real * item.Im + image * item.Re;
+        return *this;
+    }
+    
+    complex& operator /=(complex item)
+    {
+        double real = this->Re;
+        double image = this->Im;
+        this->Re = (real * item.Re + image * item.Im) / ((item.Re) * (item.Re) + item.Im * item.Im);
+        this->Im = (image * item.Re - real * item.Im) / ((item.Re) * (item.Re) + item.Im * item.Im);
+        return *this;
+    }
+    
+    bool operator ==(complex item)
+    {
+        if(this->Re == item.Re && this->Im == item.Im)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    bool operator !=(complex item)
+    {
+        if(this->Re != item.Re || this->Im != item.Im)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 };
@@ -1080,6 +1156,52 @@ void TestQueueIsSubSequenceHere()
     assert(result2 == false);
 }
 
+void TestComplexSum()
+{
+    complex test1(2, 4);
+    complex test2(1, 3);
+    complex test3 = test1 + test2;
+    assert(test3.GetRe() == 3);
+    assert(test3.GetIm() ==7);
+    assert(test1.GetRe() == 2);
+    test3+=test1;
+    assert(test3.GetRe() == 5);
+    assert(test3.GetIm() == 11);
+}
+
+void TestComplexSubtract()
+{
+    complex test1(2, 4);
+    complex test2(1, 3);
+    complex test3 = test1 - test2;
+    assert(test3.GetRe() == 1);
+    assert(test3.GetIm() == 1);
+    test3 -= test1;
+    assert(test3.GetRe() == -1);
+    assert(test3.GetIm() == -3);
+}
+
+void TestComplexMulti()
+{
+    complex test1(2, 4);
+    complex test2(1, 3);
+    complex test3 = test1 * test2;
+    assert(test3.GetRe() == -10);
+    assert(test3.GetIm() == 10);
+    test3 *= test1;
+    assert(test3.GetRe() == -60);
+    assert(test3.GetIm() == -20);
+}
+
+void TestComplexDiv()
+{
+    complex test1(1, 1);
+    complex test2(1, 1);
+    complex test3 = test1 / test2;
+    assert(test3.GetRe() == 1);
+    assert(test3.GetIm() == 0);
+}
+
 int main(int argc, const char * argv[]) {
 //    TestVectorSum();
 //    TestVectorMultiOnScalar();
@@ -1094,8 +1216,10 @@ int main(int argc, const char * argv[]) {
 //    TestQueuePush();
 //    TestQueuePop();
 //    TestQueueIsSubSequenceHere();
-    complex test;
-    std::cin >> test;
-    std::cout << test;
+//    TestQueueIsSubSequenceHere();
+    TestComplexSum();
+    TestComplexMulti();
+    TestComplexSubtract();
+    TestComplexDiv();
     return 0;
 }
