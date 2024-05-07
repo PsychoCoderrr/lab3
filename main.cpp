@@ -1,5 +1,9 @@
 #include <iostream>
 #include "assert.h"
+#include <string>
+
+typedef std::string PersonId;
+
 template <typename T> class Sequence
 {
 public:
@@ -978,6 +982,77 @@ public:
     }
 };
 
+class Person
+{
+private:
+    PersonId id;
+    std::string firstName;
+    std::string middleName;
+    std::string lastName;
+public:
+    Person()
+    {
+        id = "";
+        firstName = "";
+        middleName = "";
+        lastName = "";
+    }
+    
+    Person(PersonId id, std::string firstName, std::string middleName, std::string lastName)
+    {
+        this->id = id;
+        this->firstName = firstName;
+        this->middleName = middleName;
+        this->lastName = lastName;
+    }
+    
+    Person (const Person& man)
+    {
+        this->id = man.id;
+        this->firstName = man.firstName;
+        this->middleName = man.middleName;
+        this->lastName = man.lastName;
+    }
+    
+    PersonId GetId()
+    {
+        return this->id;
+    }
+    
+    std::string GetFirstName()
+    {
+        return this->firstName;
+    }
+    
+    std::string GetMiddleName()
+    {
+        return this->middleName;
+    }
+    
+    std::string GetLastName()
+    {
+        return this->lastName;
+    }
+    
+    friend std::istream& operator >> (std::istream& in, Person& person)
+    {
+        std::cout << "Enter first name ";
+        in >> person.firstName;
+        std::cout << "Enter middle name ";
+        in >> person.middleName;
+        std::cout << "Enter last name ";
+        in >> person.lastName;
+        std::cout << "Enter id ";
+        in >> person.id;
+        return in;
+    }
+    
+    friend std::ostream& operator << (std::ostream& out, const Person& man)
+    {
+        return out << man.firstName << " " << man.middleName << " " << man.lastName << " " << man.id << std::endl;
+    }
+};
+
 void TestVectorSum()
 {
     int a[] = {1, 2, 3, 4, 5};
@@ -1203,23 +1278,32 @@ void TestComplexDiv()
 }
 
 int main(int argc, const char * argv[]) {
-//    TestVectorSum();
-//    TestVectorMultiOnScalar();
-//    TestVectorMulti();
-//    TestStackPush();
-//    TestStackConstructors();
-//    TestStackConcat();
-//    TestStackGetSubStack();
-//    TestStackIsSubSequenceHere();
-//    TestStackPop();
-//    TestQueueCostructors();
-//    TestQueuePush();
-//    TestQueuePop();
-//    TestQueueIsSubSequenceHere();
-//    TestQueueIsSubSequenceHere();
+    TestVectorSum();
+    TestVectorMultiOnScalar();
+    TestVectorMulti();
+    TestStackPush();
+    TestStackConstructors();
+    TestStackConcat();
+    TestStackGetSubStack();
+    TestStackIsSubSequenceHere();
+    TestStackPop();
+    TestQueueCostructors();
+    TestQueuePush();
+    TestQueuePop();
+    TestQueueIsSubSequenceHere();
+    TestQueueIsSubSequenceHere();
     TestComplexSum();
     TestComplexMulti();
     TestComplexSubtract();
     TestComplexDiv();
+    PersonId id = "123456";
+    std::string FirstName = "Иван";
+    std::string MiddleName = "Иванович";
+    std::string LastName = "Иванов";
+    Person test(id, FirstName, MiddleName, LastName);
+    Person test1;
+    std::cin >> test1;
+    std::cout << test;
+    std::cout << test1;
     return 0;
 }
