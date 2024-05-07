@@ -882,7 +882,7 @@ public:
         return result;
     }
     
-    complex operator * (complex& item)
+    complex operator * (complex item)
     {
         double real = this->Re;
         double image = this->Im;
@@ -1067,6 +1067,27 @@ void TestVectorSum()
     }
 }
 
+void TestVectorSumComplex()
+{
+    complex a(1, 3);
+    complex b(2, 4);
+    complex c(3, 5);
+    complex d(4, 8);
+    complex e(4, 8);
+    complex f(6, 12);
+    complex arr1[] = {a, b};
+    complex arr2[] = {c, d};
+    complex arrRes[] = {e, f};
+    Vector<complex> test1(arr1, 2);
+    Vector<complex> test2(arr2, 2);
+    Vector<complex>* res = test1.vectorSum(test2);
+    for (int i = 0; i < res->GetLength(); i++)
+    {
+        assert(res->Get(i).GetRe() == arrRes[i].GetRe());
+        assert(res->Get(i).GetIm() == arrRes[i].GetIm());
+    }
+}
+
 void TestVectorMultiOnScalar()
 {
     int a[] = {1, 2, 3, 4, 5};
@@ -1090,6 +1111,27 @@ void TestVectorMulti()
     for (int i = 0; i < res->GetLength(); i++)
     {
         assert(res->Get(i) == c[i]);
+    }
+}
+
+void TestVectorMultiComplex()
+{
+    complex a(1, 3);
+    complex b(2, 4);
+    complex c(3, 5);
+    complex d(4, 8);
+    complex e(-12, 14);
+    complex f(-24, 32);
+    complex arr1[] = {a, b};
+    complex arr2[] = {c, d};
+    complex arrRes[] = {e, f};
+    Vector<complex> test1(arr1, 2);
+    Vector<complex> test2(arr2, 2);
+    Vector<complex>* res = test1.vectorMulti(test2);
+    for (int i = 0; i < res->GetLength(); i++)
+    {
+        assert(res->Get(i).GetRe() == arrRes[i].GetRe());
+        assert(res->Get(i).GetIm() == arrRes[i].GetIm());
     }
 }
 
@@ -1278,32 +1320,34 @@ void TestComplexDiv()
 }
 
 int main(int argc, const char * argv[]) {
-    TestVectorSum();
-    TestVectorMultiOnScalar();
-    TestVectorMulti();
-    TestStackPush();
-    TestStackConstructors();
-    TestStackConcat();
-    TestStackGetSubStack();
-    TestStackIsSubSequenceHere();
-    TestStackPop();
-    TestQueueCostructors();
-    TestQueuePush();
-    TestQueuePop();
-    TestQueueIsSubSequenceHere();
-    TestQueueIsSubSequenceHere();
-    TestComplexSum();
-    TestComplexMulti();
-    TestComplexSubtract();
-    TestComplexDiv();
-    PersonId id = "123456";
-    std::string FirstName = "Иван";
-    std::string MiddleName = "Иванович";
-    std::string LastName = "Иванов";
-    Person test(id, FirstName, MiddleName, LastName);
-    Person test1;
-    std::cin >> test1;
-    std::cout << test;
-    std::cout << test1;
+//    TestVectorSum();
+//    TestVectorMultiOnScalar();
+//    TestVectorMulti();
+//    TestStackPush();
+//    TestStackConstructors();
+//    TestStackConcat();
+//    TestStackGetSubStack();
+//    TestStackIsSubSequenceHere();
+//    TestStackPop();
+//    TestQueueCostructors();
+//    TestQueuePush();
+//    TestQueuePop();
+//    TestQueueIsSubSequenceHere();
+//    TestQueueIsSubSequenceHere();
+//    TestComplexSum();
+//    TestComplexMulti();
+//    TestComplexSubtract();
+//    TestComplexDiv();
+//    PersonId id = "123456";
+//    std::string FirstName = "Иван";
+//    std::string MiddleName = "Иванович";
+//    std::string LastName = "Иванов";
+//    Person test(id, FirstName, MiddleName, LastName);
+//    Person test1;
+//    std::cin >> test1;
+//    std::cout << test;
+//    std::cout << test1;
+    TestVectorSumComplex();
+    TestVectorMultiComplex();
     return 0;
 }
