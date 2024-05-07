@@ -344,6 +344,19 @@ template <typename T> class LinkedList
         return resultList;
     }
 
+    void RemoveLast()
+    {
+        TheNode<T> *current = head;
+        for (int i = 0; i < size - 2; i++)
+        {
+            current = current->next;
+        }
+        TheNode<T> *intermediate = current->next;
+        current->next = nullptr;
+        delete intermediate;
+        size--;
+    }
+
     T &operator[](int index)
     {
         if (index > this->size || index < 0)
@@ -437,6 +450,13 @@ template <typename T> class ListSequence : public Sequence<T>
     {
         ListSequence<T> *result = Instance();
         result->list->InsertAt(item, index);
+        return result;
+    }
+
+    ListSequence<T> *RemoveLast()
+    {
+        ListSequence<T> *result = Instance();
+        result->list->RemoveLast();
         return result;
     }
 
@@ -624,13 +644,13 @@ template <typename T> class Stack
 
     void push(const T &item)
     {
-        this->elements->Prepend(item);
+        this->elements->Append(item);
     }
 
     T pop() // удаление элемента из стека с его получением
     {
-        T result = elements->GetFirst();
-        elements = elements->GetSubSequence(1, elements->GetLength() - 1);
+        T result = elements->GetLast();
+        elements->RemoveLast();
         return result;
     }
 
@@ -1147,7 +1167,7 @@ void TestStackConstructors()
 void TestStackPush()
 {
     int a[] = {1, 2, 3, 4};
-    int b[] = {5, 1, 2, 3, 4};
+    int b[] = {1, 2, 3, 4, 5};
     Stack<int> *test = new Stack<int>(a, 4);
     assert(test->GetSize() == 4);
     test->push(5);
@@ -1163,7 +1183,7 @@ void TestStackPop()
     int a[] = {1, 2, 3, 4};
     Stack<int> test(a, 4);
     int result = test.pop();
-    assert(result == 1);
+    assert(result == 4);
     assert(test.GetSize() == 3);
 }
 
@@ -1409,6 +1429,17 @@ void TestLinkedListSubList()
     }
 }
 
+void TestLinkedListRemoveLast()
+{
+    int a[] = {1, 2, 3, 4, 5, 6};
+    int b[] = {1, 2, 3, 4, 5};
+    LinkedList<int> test1(a, 6);
+    test1.RemoveLast();
+    for (int i = 0; i < test1.GetLength(); i++)
+    {
+        assert(test1.Get(i) == b[i]);
+    }
+}
 void TestLinkedListInput()
 {
     int a[] = {1, 2, 3, 4, 5, 6, 7, 8};
@@ -1512,6 +1543,17 @@ void TestListSequenceGetSubSequence()
     }
 }
 
+void TestListSequenceRemoveLast()
+{
+    int a[] = {1, 2, 3, 4, 5, 6};
+    int b[] = {1, 2, 3, 4, 5};
+    MutableListSequence<int> test1(a, 6);
+    test1.RemoveLast();
+    for (int i = 0; i < test1.GetLength(); i++)
+    {
+        assert(test1.Get(i) == b[i]);
+    }
+}
 void StandartTests()
 {
     TestDynamicArrayConstructors();
@@ -1548,7 +1590,8 @@ int main(int argc, const char *argv[])
     std::cout << "4. Use Multi of Vectors for int Vectors\n";
     std::cout << "5. Use Multi on scalar For int Vector\n";
     std::cout << "6. Use Sum of Vectors for complex Vectors\n";
-    std::cout << "7. Stop programm\n";
+    std::cout << "7. Use Multi of Vectors for complex Vectors\n";
+    std::cout << "8. Stop programm\n";
     int flag = 1;
     while (flag)
     {
@@ -1717,7 +1760,45 @@ int main(int argc, const char *argv[])
             std::cout << std::endl;
             break;
         }
-        case 7:
+        case 7: {
+            int len1, len2;
+            complex a, b;
+            std::cout << "Enter length of the first vector: ";
+            std::cin >> len1;
+            std::cout << "Enter length of the second vector: ";
+            std::cin >> len2;
+            if (len1 != len2)
+            {
+                std::cout << "Diffrent sizes!!!";
+                break;
+            }
+            complex *arr1 = new complex[len1];
+            complex *arr2 = new complex[len2];
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the first vector: \n";
+                std::cin >> a;
+                arr1[i] = a;
+            }
+            for (int i = 0; i < len2; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the second vector: \n";
+                std::cin >> b;
+                arr2[i] = b;
+            }
+            Vector<complex> test1(arr1, len1);
+            Vector<complex> test2(arr2, len2);
+            Vector<complex> *test3 = test1.vectorMulti(test2);
+            std::cout << "Vector Result: \n";
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << test3->Get(i) << " ";
+            }
+            std::cout << std::endl;
+            break;
+        }
+
+        case 8:
             flag = 0;
             break;
         default:
@@ -1730,8 +1811,8 @@ int main(int argc, const char *argv[])
         std::cout << "4. Use Multi of Vectors for int Vectors\n";
         std::cout << "5. Use Multi on scalar For int Vector\n";
         std::cout << "6. Use Sum of Vectors for complex Vectors\n";
-        std::cout << "7. Stop programm\n";
+        std::cout << "7. Use Multi of Vectors for complex Vectors\n";
+        std::cout << "8. Stop programm\n";
     }
-
     return 0;
 }
