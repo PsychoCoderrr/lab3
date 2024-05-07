@@ -1273,6 +1273,36 @@ void TestQueueIsSubSequenceHere()
     assert(result2 == false);
 }
 
+void TestQueueGetSubStack()
+{
+    int a[] = {1, 2, 3, 4, 5, 6, 7, 8};
+    int b[] = {1, 2, 3, 4, 5};
+    Queue<int> test1(a, 8);
+    assert(test1.GetSize() == 8);
+    Queue<int>* test2 = test1.GetSubQueue(1, 5);
+    for (int i = 0; i < test2->GetSize(); i++)
+    {
+        assert(test2->ShowElement(i) == b[i]);
+    }
+}
+
+void TestQueueConcat()
+{
+    int a[] = {1, 2, 3, 4};
+    int b[] = {5, 6, 7, 8};
+    int ab[] = {1, 2, 3, 4, 5, 6, 7, 8};
+    Queue<int> test1(a, 4);
+    assert(test1.GetSize() == 4);
+    Queue<int> test2(b, 4);
+    assert(test2.GetSize() == 4);
+    Queue<int>* test3 = test1.Concat(test2);
+    assert(test3->GetSize() == 8);
+    for (int i = 0; i < test3->GetSize(); i++)
+    {
+        assert(test3->ShowElement(i) == ab[i]);
+    }
+}
+
 void TestComplexSum()
 {
     complex test1(2, 4);
@@ -1319,35 +1349,263 @@ void TestComplexDiv()
     assert(test3.GetIm() == 0);
 }
 
+void
+TestDynamicArrayConstructors ()
+{
+  int a[] = { 1, 2, 3, 4, 5, 6 };
+
+  DynamicArray<int> test1 (6);
+  assert (test1.GetSize () == 6);
+
+  DynamicArray<int> test2 (a, 6);
+  assert (test2.GetSize () == 6);
+  for (int i = 0; i < test2.GetSize (); i++)
+    {
+      assert (test2.Get (i) == a[i]);
+    }
+
+  DynamicArray<int> test3 (test2);
+  assert (test3.GetSize () == test2.GetSize ());
+  for (int i = 0; i < test3.GetSize (); i++)
+    {
+      assert (test2.Get (i) == test3.Get (i));
+    }
+}
+
+void
+TestDynamicArraySet ()
+{
+  int a[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
+  DynamicArray<int> test (a, 8);
+  assert (test.GetSize () == 8);
+  for (int i = 0; i < test.GetSize (); i++)
+    {
+      assert (test.Get (i) == a[i]);
+    }
+  test.Set (9, 3);
+  assert (test.Get (3) == 9);
+  test[3] = 10;
+  assert (test[3] == 10);
+}
+
+void
+TestLinkedListConstructors ()
+{
+  int a[] = { 1, 2, 3, 4, 5, 6 };
+
+  LinkedList<int> test1 (a, 6);
+  assert (test1.GetLength () == 6);
+  for (int i = 0; i < test1.GetLength (); i++)
+    {
+      assert (test1.Get (i) == a[i]);
+    }
+
+  LinkedList<int> test2 (test1);
+  assert (test2.GetLength () == test1.GetLength ());
+  for (int i = 0; i < test2.GetLength (); i++)
+    {
+      assert (test1.Get (i) == test2.Get (i));
+    }
+}
+
+void
+TestLinkedListSubList ()
+{
+  int a[] = { 1, 2, 3, 4, 5, 6 };
+  int b[] = { 3, 4, 5 };
+  LinkedList<int> test10 (a, 6);
+  LinkedList<int> *test11 = test10.GetSubList (2, 4);
+  for (int i = 0; i < test11->GetLength (); i++)
+    {
+      assert (test11->Get (i) == b[i]);
+    }
+}
+
+void
+TestLinkedListInput ()
+{
+  int a[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
+  LinkedList<int> test1 (a, 8);
+  test1.Append (10);
+  assert (test1.GetLast () == 10);
+
+  int b[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
+  LinkedList<int> test3 (b, 8);
+  test3.Prepend (10);
+  assert (test3.GetFirst () == 10);
+
+  int c[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
+  LinkedList<int> test2 (c, 8);
+  test2.InsertAt (10, 3);
+  assert (test2[3] == 10);
+}
+
+void
+TestLinkedListConcat ()
+{
+  int b[] = { 1, 2, 3 };
+  int c[] = { 4, 5, 6 };
+  int bc[] = { 1, 2, 3, 4, 5, 6 };
+  LinkedList<int> test6 (b, 3);
+  LinkedList<int> test7 (c, 3);
+  LinkedList<int> *test8 = test6.Concat (test7);
+  assert (test8->GetLength () == test6.GetLength () + test7.GetLength ());
+  for (int i = 0; i < test8->GetLength (); i++)
+    {
+      assert (test8->Get (i) == bc[i]);
+    }
+}
+
+void
+TestListSequenceConstructors ()
+{
+  int a[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
+  MutableListSequence<int> testM1 (a, 8);
+  assert (testM1.GetLength () == 8);
+  for (int i = 0; i < testM1.GetLength (); i++)
+    {
+      assert (testM1.Get (i) == a[i]);
+    }
+
+  MutableListSequence<int> testM2 (testM1);
+  assert (testM2.GetLength () == testM1.GetLength ());
+  for (int i = 0; i < testM2.GetLength (); i++)
+    {
+      assert (testM2.Get (i) == testM1.Get (i));
+    }
+
+}
+
+void
+TestListInput ()
+{
+  int a[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
+  MutableListSequence<int> test1 (a, 8);
+  assert (test1.GetLength () == 8);
+  test1.Append (10);
+  assert (test1.GetLength () == 9);
+  assert (test1.GetLast () == 10);
+
+  int b[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
+  MutableListSequence<int> test2 (b, 8);
+  assert (test2.GetLength () == 8);
+  test2.Prepend (10);
+  assert (test2.GetLength ());
+  assert (test2.GetFirst () == 10);
+
+  int c[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
+  MutableListSequence<int> test3 (c, 8);
+  assert (test3.GetLength () == 8);
+  test3.InsertAt (10, 3);
+  assert (test3.GetLength ());
+  assert (test3.Get (3) == 10);
+}
+
+void
+TestListSequenceConcat ()
+{
+  int b[] = { 1, 2, 3 };
+  int c[] = { 4, 5, 6 };
+  int bc[] = { 1, 2, 3, 4, 5, 6 };
+  MutableListSequence<int> test1 (b, 3);
+  MutableListSequence<int> test2 (c, 3);
+  MutableListSequence<int> *result = test1.Concat (test2);
+  assert (result->GetLength () == 6);
+  for (int i = 0; i < result->GetLength (); i++)
+    {
+      assert (result->Get (i) == bc[i]);
+    }
+}
+
+void
+TestListSequenceGetSubSequence ()
+{
+  int a[] = { 1, 2, 3, 4, 5, 6 };
+  int b[] = { 3, 4, 5 };
+  MutableListSequence<int> test1 (a, 6);
+  MutableListSequence<int> *result = test1.GetSubSequence (3, 5);
+  assert (result->GetLength () == 3);
+  for (int i = 0; i < result->GetLength (); i++)
+    {
+      assert (result->Get (i) == b[i]);
+    }
+}
+
+void StandartTests()
+{
+    TestDynamicArrayConstructors ();
+    TestDynamicArraySet ();
+    
+    TestLinkedListConstructors ();
+    TestLinkedListInput ();
+    TestLinkedListConcat ();
+    TestLinkedListSubList ();
+    
+    TestListSequenceConstructors ();
+    TestListInput ();
+    TestListSequenceConcat ();
+    TestListSequenceGetSubSequence ();
+}
+
+void TestForComplex()
+{
+    TestComplexSum();
+    TestComplexSubtract();
+    TestComplexMulti();
+    TestComplexDiv();
+}
+
 int main(int argc, const char * argv[]) {
-//    TestVectorSum();
-//    TestVectorMultiOnScalar();
-//    TestVectorMulti();
-//    TestStackPush();
-//    TestStackConstructors();
-//    TestStackConcat();
-//    TestStackGetSubStack();
-//    TestStackIsSubSequenceHere();
-//    TestStackPop();
-//    TestQueueCostructors();
-//    TestQueuePush();
-//    TestQueuePop();
-//    TestQueueIsSubSequenceHere();
-//    TestQueueIsSubSequenceHere();
-//    TestComplexSum();
-//    TestComplexMulti();
-//    TestComplexSubtract();
-//    TestComplexDiv();
-//    PersonId id = "123456";
-//    std::string FirstName = "Иван";
-//    std::string MiddleName = "Иванович";
-//    std::string LastName = "Иванов";
-//    Person test(id, FirstName, MiddleName, LastName);
-//    Person test1;
-//    std::cin >> test1;
-//    std::cout << test;
-//    std::cout << test1;
-    TestVectorSumComplex();
-    TestVectorMultiComplex();
+    StandartTests();
+    TestForComplex();
+    int status = 0;
+    std::cout << "0. Run tests for Vector\n";
+    std::cout << "1. Run tests for Stack\n";
+    std::cout << "2. Run tests for Queue\n";
+    std::cout << "3. Stop programm\n";
+    int flag = 1;
+    while (flag)
+      {
+        std::cin >> status;
+        switch (status)
+          {
+          case 0:
+                  TestVectorSum();
+                  TestVectorSumComplex();
+                  TestVectorMultiOnScalar();
+                  TestVectorMulti();
+                  TestVectorMultiComplex();
+                  std::cout << "Tests for Vector passed\n";
+            break;
+          case 1:
+                  TestStackConstructors();
+                  TestStackPush();
+                  TestStackPop();
+                  TestStackConcat();
+                  TestStackGetSubStack();
+                  TestStackIsSubSequenceHere();
+                  std::cout << "Tests for Stack passed\n";
+                  break;
+          case 2:
+                  TestQueueCostructors();
+                  TestQueuePush();
+                  TestQueuePop();
+                  TestQueueIsSubSequenceHere();
+                  TestQueueGetSubStack();
+                  TestQueueConcat();
+                  std::cout << "Tests for Queue passed\n";
+                  break;
+          case 3:
+            flag = 0;
+            break;
+          default:
+            std::cout << "Неизвестная команда\n";
+          }
+        std::cout << "0. Run tests for Vector\n";
+        std::cout << "1. Run tests for Stack\n";
+        std::cout << "2. Run tests for Queue\n";
+        std::cout << "3. Stop programm\n";
+      }
+    
     return 0;
 }
