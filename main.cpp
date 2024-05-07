@@ -1544,7 +1544,9 @@ int main(int argc, const char *argv[])
     std::cout << "0. Run tests for Vector\n";
     std::cout << "1. Run tests for Stack\n";
     std::cout << "2. Run tests for Queue\n";
-    std::cout << "3. Stop programm\n";
+    std::cout << "3. Use Sum of Vectors for int Vectors\n";
+    std::cout << "4. Use Multi of Vectors for int Vectors\n";
+    std::cout << "5. Stop programm\n";
     int flag = 1;
     while (flag)
     {
@@ -1578,6 +1580,43 @@ int main(int argc, const char *argv[])
             std::cout << "Tests for Queue passed\n";
             break;
         case 3:
+            {
+                int len1, len2;
+                int a, b;
+                std::cout << "Enter length of the first vector: ";
+                std::cin >> len1;
+                std::cout << "Enter length of the second vector: ";
+                std::cin >> len2;
+                if (len1 != len2)
+                {
+                    std::cout << "Diffrent sizes!!!";
+                    break;
+                }
+                int* arr1 = new int[len1];
+                int* arr2 = new int[len2];
+                for (int i = 0; i < len1; i++)
+                {
+                    std::cout << "Enter " << i << " element of the first vector: ";
+                    std::cin >> a;
+                    arr1[i] = a;
+                }
+                for (int i = 0; i < len2; i++)
+                {
+                    std::cout << "Enter " << i << " element of the second vector: ";
+                    std::cin >> b;
+                    arr2[i] = b;
+                }
+                Vector<int> test1(arr1, len1);
+                Vector<int> test2(arr2, len2);
+                Vector<int>* test3 = test1.vectorSum(test2);
+                for (int i = 0; i < len1; i++)
+                {
+                    std::cout << test3->Get(i) << " ";
+                }
+                std::cout << std::endl;
+                break;
+            }
+        case 4:
             flag = 0;
             break;
         default:
@@ -1586,7 +1625,9 @@ int main(int argc, const char *argv[])
         std::cout << "0. Run tests for Vector\n";
         std::cout << "1. Run tests for Stack\n";
         std::cout << "2. Run tests for Queue\n";
-        std::cout << "3. Stop programm\n";
+        std::cout << "3. Use Sum of Vectors for int Vectors\n";
+        std::cout << "4. Use Multi of Vectors for int Vectors\n";
+        std::cout << "5. Stop programm\n";
     }
 
     return 0;
