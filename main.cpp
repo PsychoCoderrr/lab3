@@ -663,8 +663,9 @@ template <typename T> class Stack
     {
         for (int i = 0; i < this->GetSize(); i++)
         {
-            std::cout << this->ShowElement(i) << std::endl;
+            std::cout << this->ShowElement(i) << " ";
         }
+        std::cout << std::endl;
     }
 
     bool IsStackEmpty()
@@ -1591,7 +1592,9 @@ int main(int argc, const char *argv[])
     std::cout << "5. Use Multi on scalar For int Vector\n";
     std::cout << "6. Use Sum of Vectors for complex Vectors\n";
     std::cout << "7. Use Multi of Vectors for complex Vectors\n";
-    std::cout << "8. Stop programm\n";
+    std::cout << "8. Use Concat for Stack of int\n";
+    std::cout << "9. Use SubStack for Stack of int\n";
+    std::cout << "10. Stop programm\n";
     int flag = 1;
     while (flag)
     {
@@ -1797,8 +1800,35 @@ int main(int argc, const char *argv[])
             std::cout << std::endl;
             break;
         }
+            case 8:{
+                int len1, len2;
+                int a, b;
+                std::cout << "Enter length of the first stack: ";
+                std::cin >> len1;
+                std::cout << "Enter length of the second stack: ";
+                std::cin >> len2;
+                int *arr1 = new int[len1];
+                int *arr2 = new int[len2];
+                for (int i = 0; i < len1; i++)
+                {
+                    std::cout << "Enter " << i + 1 << " element of the first vector: ";
+                    std::cin >> a;
+                    arr1[i] = a;
+                }
+                for (int i = 0; i < len2; i++)
+                {
+                    std::cout << "Enter " << i + 1 << " element of the second vector: ";
+                    std::cin >> b;
+                    arr2[i] = b;
+                }
+                Stack<int> test1(arr1, len1);
+                Stack<int> test2(arr2, len2);
+                Stack<int>* testResult = test1.Concat(test2);
+                testResult->StackShow();
+                break;
+            }
 
-        case 8:
+        case 9:
             flag = 0;
             break;
         default:
@@ -1812,7 +1842,9 @@ int main(int argc, const char *argv[])
         std::cout << "5. Use Multi on scalar For int Vector\n";
         std::cout << "6. Use Sum of Vectors for complex Vectors\n";
         std::cout << "7. Use Multi of Vectors for complex Vectors\n";
-        std::cout << "8. Stop programm\n";
+        std::cout << "8. Use Concat for Stack of int\n";
+        std::cout << "9. Use SubStack for Stack of int\n";
+        std::cout << "10. Stop programm\n";
     }
     return 0;
 }
