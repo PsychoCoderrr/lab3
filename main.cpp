@@ -906,11 +906,11 @@ class complex
     {
         if (item.Im < 0)
         {
-            return out << item.Re << "+i" << item.Im << ")" << std::endl;
+            return out << item.Re << "+i" << item.Im << ")" << " ";
         }
         else
         {
-            return out << item.Re << "+i" << item.Im << std::endl;
+            return out << item.Re << "+i" << item.Im << " ";
         }
     }
 
@@ -1546,7 +1546,9 @@ int main(int argc, const char *argv[])
     std::cout << "2. Run tests for Queue\n";
     std::cout << "3. Use Sum of Vectors for int Vectors\n";
     std::cout << "4. Use Multi of Vectors for int Vectors\n";
-    std::cout << "5. Stop programm\n";
+    std::cout << "5. Use Multi on scalar For int Vector\n";
+    std::cout << "6. Use Sum of Vectors for complex Vectors\n";
+    std::cout << "7. Stop programm\n";
     int flag = 1;
     while (flag)
     {
@@ -1579,83 +1581,143 @@ int main(int argc, const char *argv[])
             TestQueueConcat();
             std::cout << "Tests for Queue passed\n";
             break;
-        case 3:
+        case 3: {
+            int len1, len2;
+            int a, b;
+            std::cout << "Enter length of the first vector: ";
+            std::cin >> len1;
+            std::cout << "Enter length of the second vector: ";
+            std::cin >> len2;
+            if (len1 != len2)
             {
-                int len1, len2;
-                int a, b;
-                std::cout << "Enter length of the first vector: ";
-                std::cin >> len1;
-                std::cout << "Enter length of the second vector: ";
-                std::cin >> len2;
-                if (len1 != len2)
-                {
-                    std::cout << "Diffrent sizes!!!";
-                    break;
-                }
-                int* arr1 = new int[len1];
-                int* arr2 = new int[len2];
-                for (int i = 0; i < len1; i++)
-                {
-                    std::cout << "Enter " << i+1 << " element of the first vector: ";
-                    std::cin >> a;
-                    arr1[i] = a;
-                }
-                for (int i = 0; i < len2; i++)
-                {
-                    std::cout << "Enter " << i+1 << " element of the second vector: ";
-                    std::cin >> b;
-                    arr2[i] = b;
-                }
-                Vector<int> test1(arr1, len1);
-                Vector<int> test2(arr2, len2);
-                Vector<int>* test3 = test1.vectorSum(test2);
-                std::cout << "Vector Result: ";
-                for (int i = 0; i < len1; i++)
-                {
-                    std::cout << test3->Get(i) << " ";
-                }
-                std::cout << std::endl;
+                std::cout << "Diffrent sizes!!!";
                 break;
             }
-        case 4:
+            int *arr1 = new int[len1];
+            int *arr2 = new int[len2];
+            for (int i = 0; i < len1; i++)
             {
-                int len1, len2;
-                int a, b;
-                std::cout << "Enter length of the first vector: ";
-                std::cin >> len1;
-                std::cout << "Enter length of the second vector: ";
-                std::cin >> len2;
-                if (len1 != len2)
-                {
-                    std::cout << "Diffrent sizes!!!";
-                    break;
-                }
-                int* arr1 = new int[len1];
-                int* arr2 = new int[len2];
-                for (int i = 0; i < len1; i++)
-                {
-                    std::cout << "Enter " << i+1 << " element of the first vector: ";
-                    std::cin >> a;
-                    arr1[i] = a;
-                }
-                for (int i = 0; i < len2; i++)
-                {
-                    std::cout << "Enter " << i+1 << " element of the second vector: ";
-                    std::cin >> b;
-                    arr2[i] = b;
-                }
-                Vector<int> test1(arr1, len1);
-                Vector<int> test2(arr2, len2);
-                Vector<int>* test3 = test1.vectorMulti(test2);
-                std::cout << "Vector Result: ";
-                for (int i = 0; i < len1; i++)
-                {
-                    std::cout << test3->Get(i) << " ";
-                }
-                std::cout << std::endl;
+                std::cout << "Enter " << i + 1 << " element of the first vector: ";
+                std::cin >> a;
+                arr1[i] = a;
+            }
+            for (int i = 0; i < len2; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the second vector: ";
+                std::cin >> b;
+                arr2[i] = b;
+            }
+            Vector<int> test1(arr1, len1);
+            Vector<int> test2(arr2, len2);
+            Vector<int> *test3 = test1.vectorSum(test2);
+            std::cout << "Vector Result: ";
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << test3->Get(i) << " ";
+            }
+            std::cout << std::endl;
+            break;
+        }
+        case 4: {
+            int len1, len2;
+            int a, b;
+            std::cout << "Enter length of the first vector: ";
+            std::cin >> len1;
+            std::cout << "Enter length of the second vector: ";
+            std::cin >> len2;
+            if (len1 != len2)
+            {
+                std::cout << "Diffrent sizes!!!";
                 break;
             }
-        case 5:
+            int *arr1 = new int[len1];
+            int *arr2 = new int[len2];
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the first vector: ";
+                std::cin >> a;
+                arr1[i] = a;
+            }
+            for (int i = 0; i < len2; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the second vector: ";
+                std::cin >> b;
+                arr2[i] = b;
+            }
+            Vector<int> test1(arr1, len1);
+            Vector<int> test2(arr2, len2);
+            Vector<int> *test3 = test1.vectorMulti(test2);
+            std::cout << "Vector Result: ";
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << test3->Get(i) << " ";
+            }
+            std::cout << std::endl;
+            break;
+        }
+        case 5: {
+            int len1;
+            int a;
+            std::cout << "Enter length of vector: ";
+            std::cin >> len1;
+            int *arr1 = new int[len1];
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the first vector: ";
+                std::cin >> a;
+                arr1[i] = a;
+            }
+            Vector<int> test1(arr1, len1);
+            int scalar;
+            std::cout << "Enter scalar: ";
+            std::cin >> scalar;
+            Vector<int> *test2 = test1.vectorMultiOnScalar(scalar);
+            std::cout << "Vector Result: ";
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << test2->Get(i) << " ";
+            }
+            std::cout << std::endl;
+            break;
+        }
+        case 6: {
+            int len1, len2;
+            complex a, b;
+            std::cout << "Enter length of the first vector: ";
+            std::cin >> len1;
+            std::cout << "Enter length of the second vector: ";
+            std::cin >> len2;
+            if (len1 != len2)
+            {
+                std::cout << "Diffrent sizes!!!";
+                break;
+            }
+            complex *arr1 = new complex[len1];
+            complex *arr2 = new complex[len2];
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the first vector: \n";
+                std::cin >> a;
+                arr1[i] = a;
+            }
+            for (int i = 0; i < len2; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the second vector: \n";
+                std::cin >> b;
+                arr2[i] = b;
+            }
+            Vector<complex> test1(arr1, len1);
+            Vector<complex> test2(arr2, len2);
+            Vector<complex> *test3 = test1.vectorMulti(test2);
+            std::cout << "Vector Result: \n";
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << test3->Get(i) << " ";
+            }
+            std::cout << std::endl;
+            break;
+        }
+        case 7:
             flag = 0;
             break;
         default:
@@ -1666,7 +1728,9 @@ int main(int argc, const char *argv[])
         std::cout << "2. Run tests for Queue\n";
         std::cout << "3. Use Sum of Vectors for int Vectors\n";
         std::cout << "4. Use Multi of Vectors for int Vectors\n";
-        std::cout << "5. Stop programm\n";
+        std::cout << "5. Use Multi on scalar For int Vector\n";
+        std::cout << "6. Use Sum of Vectors for complex Vectors\n";
+        std::cout << "7. Stop programm\n";
     }
 
     return 0;
