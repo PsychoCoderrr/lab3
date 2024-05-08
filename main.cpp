@@ -1,4 +1,5 @@
 #include "assert.h"
+#include <compare>
 #include <iostream>
 #include <string>
 
@@ -1049,13 +1050,13 @@ class Person
 
     friend std::istream &operator>>(std::istream &in, Person &person)
     {
-        std::cout << "Enter first name ";
+        std::cout << "Enter first name: ";
         in >> person.firstName;
-        std::cout << "Enter middle name ";
+        std::cout << "Enter middle name: ";
         in >> person.middleName;
-        std::cout << "Enter last name ";
+        std::cout << "Enter last name: ";
         in >> person.lastName;
-        std::cout << "Enter id ";
+        std::cout << "Enter id: ";
         in >> person.id;
         return in;
     }
@@ -1063,6 +1064,19 @@ class Person
     friend std::ostream &operator<<(std::ostream &out, const Person &man)
     {
         return out << man.firstName << " " << man.middleName << " " << man.lastName << " " << man.id << std::endl;
+    }
+
+    bool operator==(Person man)
+    {
+        if ((id == man.GetId()) && (middleName == man.GetMiddleName()) &&
+            (firstName == man.GetFirstName()) && (lastName == man.GetLastName()))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 };
 
@@ -1598,7 +1612,10 @@ int main(int argc, const char *argv[])
     std::cout << "11. Use Concat for Stack of complex\n";
     std::cout << "12. Use SubStack for Stack of complex\n";
     std::cout << "13. Use IsSuqSequenceHere for Stack of complex\n";
-    std::cout << "14. Stop programm\n";
+    std::cout << "14. Use Concat for Stack of Person\n";
+    std::cout << "15. Use SubStack for Stack of Person\n";
+    std::cout << "16. Use IsSuqSequenceHere for Stack of Person\n";
+    std::cout << "17. Stop programm\n";
     int flag = 1;
     while (flag)
     {
@@ -1888,91 +1905,175 @@ int main(int argc, const char *argv[])
             std::cout << std::endl;
             break;
         }
-            case 11: {
-                int len1, len2;
-                complex a, b;
-                std::cout << "Enter length of the first stack: ";
-                std::cin >> len1;
-                std::cout << "Enter length of the second stack: ";
-                std::cin >> len2;
-                complex *arr1 = new complex[len1];
-                complex *arr2 = new complex[len2];
-                for (int i = 0; i < len1; i++)
-                {
-                    std::cout << "Enter " << i + 1 << " element of the first stack: "<< std::endl;
-                    std::cin >> a;
-                    arr1[i] = a;
-                }
-                for (int i = 0; i < len2; i++)
-                {
-                    std::cout << "Enter " << i + 1 << " element of the second stack: " << std::endl;
-                    std::cin >> b;
-                    arr2[i] = b;
-                }
-                Stack<complex> test1(arr1, len1);
-                Stack<complex> test2(arr2, len2);
-                Stack<complex> *testResult = test1.Concat(test2);
-                testResult->StackShow();
-                break;
+        case 11: {
+            int len1, len2;
+            complex a, b;
+            std::cout << "Enter length of the first stack: ";
+            std::cin >> len1;
+            std::cout << "Enter length of the second stack: ";
+            std::cin >> len2;
+            complex *arr1 = new complex[len1];
+            complex *arr2 = new complex[len2];
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the first stack: " << std::endl;
+                std::cin >> a;
+                arr1[i] = a;
             }
-            case 12: {
-                int len1;
-                complex a;
-                int start, end;
-                std::cout << "Enter length of stack: ";
-                std::cin >> len1;
-                complex *arr1 = new complex[len1];
-                for (int i = 0; i < len1; i++)
-                {
-                    std::cout << "Enter " << i + 1 << " element of the first vector: " << std::endl;
-                    std::cin >> a;
-                    arr1[i] = a;
-                }
-                std::cout << "Enter first index of SubStack: ";
-                std::cin >> start;
-                std::cout << "Enter last index of SubStack: ";
-                std::cin >> end;
-                Stack<complex> test1(arr1, len1);
-                Stack<complex> *test2 = test1.GetSubStack(start, end);
-                test2->StackShow();
-                break;
+            for (int i = 0; i < len2; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the second stack: " << std::endl;
+                std::cin >> b;
+                arr2[i] = b;
             }
-            case 13: {
-                int len1, len2;
-                complex a, b;
-                std::cout << "Enter length of the main stack: ";
-                std::cin >> len1;
-                std::cout << "Enter length of the  SubStack: ";
-                std::cin >> len2;
-                complex *arr1 = new complex[len1];
-                complex *arr2 = new complex[len2];
-                for (int i = 0; i < len1; i++)
-                {
-                    std::cout << "Enter " << i + 1 << " element of the first vector: " << std::endl;
-                    std::cin >> a;
-                    arr1[i] = a;
-                }
-                for (int i = 0; i < len2; i++)
-                {
-                    std::cout << "Enter " << i + 1 << " element of the second vector: " << std::endl;
-                    std::cin >> b;
-                    arr2[i] = b;
-                }
-                Stack<complex> test1(arr1, len1);
-                Stack<complex> test2(arr2, len2);
-                bool result = test1.IsSubSequenceHere(test2);
-                if (result)
-                {
-                    std::cout << "It`s here!!!";
-                }
-                else
-                {
-                    std::cout << "It`s not here(((";
-                }
-                std::cout << std::endl;
-                break;
+            Stack<complex> test1(arr1, len1);
+            Stack<complex> test2(arr2, len2);
+            Stack<complex> *testResult = test1.Concat(test2);
+            testResult->StackShow();
+            break;
+        }
+        case 12: {
+            int len1;
+            complex a;
+            int start, end;
+            std::cout << "Enter length of stack: ";
+            std::cin >> len1;
+            complex *arr1 = new complex[len1];
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the stack: " << std::endl;
+                std::cin >> a;
+                arr1[i] = a;
             }
-        case 14:
+            std::cout << "Enter first index of SubStack: ";
+            std::cin >> start;
+            std::cout << "Enter last index of SubStack: ";
+            std::cin >> end;
+            Stack<complex> test1(arr1, len1);
+            Stack<complex> *test2 = test1.GetSubStack(start, end);
+            test2->StackShow();
+            break;
+        }
+        case 13: {
+            int len1, len2;
+            complex a, b;
+            std::cout << "Enter length of the main stack: ";
+            std::cin >> len1;
+            std::cout << "Enter length of the  SubStack: ";
+            std::cin >> len2;
+            complex *arr1 = new complex[len1];
+            complex *arr2 = new complex[len2];
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the first vector: " << std::endl;
+                std::cin >> a;
+                arr1[i] = a;
+            }
+            for (int i = 0; i < len2; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the second vector: " << std::endl;
+                std::cin >> b;
+                arr2[i] = b;
+            }
+            Stack<complex> test1(arr1, len1);
+            Stack<complex> test2(arr2, len2);
+            bool result = test1.IsSubSequenceHere(test2);
+            if (result)
+            {
+                std::cout << "It`s here!!!";
+            }
+            else
+            {
+                std::cout << "It`s not here(((";
+            }
+            std::cout << std::endl;
+            break;
+        }
+        case 14: {
+            int len1, len2;
+            Person a, b;
+            std::cout << "Enter length of the first stack: ";
+            std::cin >> len1;
+            std::cout << "Enter length of the second stack: ";
+            std::cin >> len2;
+            Person *arr1 = new Person[len1];
+            Person *arr2 = new Person[len2];
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the first stack: " << std::endl;
+                std::cin >> a;
+                arr1[i] = a;
+            }
+            for (int i = 0; i < len2; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the second stack: " << std::endl;
+                std::cin >> b;
+                arr2[i] = b;
+            }
+            Stack<Person> test1(arr1, len1);
+            Stack<Person> test2(arr2, len2);
+            Stack<Person> *testResult = test1.Concat(test2);
+            testResult->StackShow();
+            break;
+        }
+        case 15: {
+            int len1;
+            Person a;
+            int start, end;
+            std::cout << "Enter length of stack: ";
+            std::cin >> len1;
+            Person *arr1 = new Person[len1];
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of stack: " << std::endl;
+                std::cin >> a;
+                arr1[i] = a;
+            }
+            std::cout << "Enter first index of SubStack: ";
+            std::cin >> start;
+            std::cout << "Enter last index of SubStack: ";
+            std::cin >> end;
+            Stack<Person> test1(arr1, len1);
+            Stack<Person> *test2 = test1.GetSubStack(start, end);
+            test2->StackShow();
+            break;
+        }
+        case 16: {
+            int len1, len2;
+            Person a, b;
+            std::cout << "Enter length of the main stack: ";
+            std::cin >> len1;
+            std::cout << "Enter length of the  SubStack: ";
+            std::cin >> len2;
+            Person *arr1 = new Person[len1];
+            Person *arr2 = new Person[len2];
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the main stack: " << std::endl;
+                std::cin >> a;
+                arr1[i] = a;
+            }
+            for (int i = 0; i < len2; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the SubStack: " << std::endl;
+                std::cin >> b;
+                arr2[i] = b;
+            }
+            Stack<Person> test1(arr1, len1);
+            Stack<Person> test2(arr2, len2);
+            bool result = test1.IsSubSequenceHere(test2);
+            if (result)
+            {
+                std::cout << "It`s here!!!";
+            }
+            else
+            {
+                std::cout << "It`s not here(((";
+            }
+            std::cout << std::endl;
+            break;
+        }
+        case 17:
             flag = 0;
             break;
         default:
@@ -1992,7 +2093,10 @@ int main(int argc, const char *argv[])
         std::cout << "11. Use Concat for Stack of complex\n";
         std::cout << "12. Use SubStack for Stack of complex\n";
         std::cout << "13. Use IsSuqSequenceHere for Stack of complex\n";
-        std::cout << "14. Stop programm\n";
+        std::cout << "14. Use Concat for Stack of Person\n";
+        std::cout << "15. Use SubStack for Stack of Person\n";
+        std::cout << "16. Use IsSuqSequenceHere for Stack of Person\n";
+        std::cout << "17. Stop programm\n";
     }
     return 0;
 }
