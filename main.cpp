@@ -777,7 +777,7 @@ template <typename T> class Queue
         return result;
     }
 
-    T GetSize()
+    int GetSize()
     {
         return elements->GetLength();
     }
@@ -928,7 +928,7 @@ class complex
     {
         if (item.Im < 0)
         {
-            return out << item.Re << "+i" << item.Im << ")" << " ";
+            return out << item.Re << "+i" << "(" << item.Im << ")" << " ";
         }
         else
         {
@@ -1068,8 +1068,8 @@ class Person
 
     bool operator==(Person man)
     {
-        if ((id == man.GetId()) && (middleName == man.GetMiddleName()) &&
-            (firstName == man.GetFirstName()) && (lastName == man.GetLastName()))
+        if ((id == man.GetId()) && (middleName == man.GetMiddleName()) && (firstName == man.GetFirstName()) &&
+            (lastName == man.GetLastName()))
         {
             return true;
         }
@@ -1615,7 +1615,16 @@ int main(int argc, const char *argv[])
     std::cout << "14. Use Concat for Stack of Person\n";
     std::cout << "15. Use SubStack for Stack of Person\n";
     std::cout << "16. Use IsSuqSequenceHere for Stack of Person\n";
-    std::cout << "17. Stop programm\n";
+    std::cout << "17. Use Concat for Queue of int\n";
+    std::cout << "18. Use SubStack for Queue of int\n";
+    std::cout << "19. Use IsSuqSequenceHere for Queue of int\n";
+    std::cout << "20. Use Concat for Queue of complex\n";
+    std::cout << "21. Use SubStack for Queue of complex\n";
+    std::cout << "22. Use IsSuqSequenceHere for Queue of complex\n";
+    std::cout << "23. Use Concat for Queue of Person\n";
+    std::cout << "24. Use SubStack for Queue of Person\n";
+    std::cout << "25. Use IsSuqSequenceHere for Queue of Person\n";
+    std::cout << "26. Stop programm\n";
     int flag = 1;
     while (flag)
     {
@@ -1965,13 +1974,13 @@ int main(int argc, const char *argv[])
             complex *arr2 = new complex[len2];
             for (int i = 0; i < len1; i++)
             {
-                std::cout << "Enter " << i + 1 << " element of the first vector: " << std::endl;
+                std::cout << "Enter " << i + 1 << " element of the first stack: " << std::endl;
                 std::cin >> a;
                 arr1[i] = a;
             }
             for (int i = 0; i < len2; i++)
             {
-                std::cout << "Enter " << i + 1 << " element of the second vector: " << std::endl;
+                std::cout << "Enter " << i + 1 << " element of the second stack: " << std::endl;
                 std::cin >> b;
                 arr2[i] = b;
             }
@@ -2073,7 +2082,259 @@ int main(int argc, const char *argv[])
             std::cout << std::endl;
             break;
         }
-        case 17:
+        case 17: {
+            int len1, len2;
+            int a, b;
+            std::cout << "Enter length of the first queue: ";
+            std::cin >> len1;
+            std::cout << "Enter length of the second queue: ";
+            std::cin >> len2;
+            int *arr1 = new int[len1];
+            int *arr2 = new int[len2];
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the first queue: ";
+                std::cin >> a;
+                arr1[i] = a;
+            }
+            for (int i = 0; i < len2; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the second queue: ";
+                std::cin >> b;
+                arr2[i] = b;
+            }
+            Queue<int> test1(arr1, len1);
+            Queue<int> test2(arr2, len2);
+            Queue<int> *testResult = test1.Concat(test2);
+            testResult->QueueShow();
+            break;
+        }
+        case 18: {
+            int len1;
+            int a;
+            int start, end;
+            std::cout << "Enter length of queue: ";
+            std::cin >> len1;
+            int *arr1 = new int[len1];
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the first queue: ";
+                std::cin >> a;
+                arr1[i] = a;
+            }
+            std::cout << "Enter first index of SubQueue: ";
+            std::cin >> start;
+            std::cout << "Enter last index of SubQueue: ";
+            std::cin >> end;
+            Queue<int> test1(arr1, len1);
+            Queue<int> *test2 = test1.GetSubQueue(start, end);
+            test2->QueueShow();
+            break;
+        }
+        case 19: {
+            int len1, len2;
+            int a, b;
+            std::cout << "Enter length of the main queue: ";
+            std::cin >> len1;
+            std::cout << "Enter length of the  SubQueue: ";
+            std::cin >> len2;
+            int *arr1 = new int[len1];
+            int *arr2 = new int[len2];
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the main queue: ";
+                std::cin >> a;
+                arr1[i] = a;
+            }
+            for (int i = 0; i < len2; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the  SubQueue: ";
+                std::cin >> b;
+                arr2[i] = b;
+            }
+            Queue<int> test1(arr1, len1);
+            Queue<int> test2(arr2, len2);
+            bool result = test1.IsSubSequenceHere(test2);
+            if (result)
+            {
+                std::cout << "It`s here!!!";
+            }
+            else
+            {
+                std::cout << "It`s not here(((";
+            }
+            std::cout << std::endl;
+            break;
+        }
+        case 20: {
+            int len1, len2;
+            complex a, b;
+            std::cout << "Enter length of the first queue: ";
+            std::cin >> len1;
+            std::cout << "Enter length of the second queue: ";
+            std::cin >> len2;
+            complex *arr1 = new complex[len1];
+            complex *arr2 = new complex[len2];
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the first queue: " << std::endl;
+                std::cin >> a;
+                arr1[i] = a;
+            }
+            for (int i = 0; i < len2; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the second queue: " << std::endl;
+                std::cin >> b;
+                arr2[i] = b;
+            }
+            Queue<complex> test1(arr1, len1);
+            Queue<complex> test2(arr2, len2);
+            Queue<complex> *testResult = test1.Concat(test2);
+            testResult->QueueShow();
+            break;
+        }
+        case 21: {
+            int len1;
+            complex a;
+            int start, end;
+            std::cout << "Enter length of queue: ";
+            std::cin >> len1;
+            complex *arr1 = new complex[len1];
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the queue: " << std::endl;
+                std::cin >> a;
+                arr1[i] = a;
+            }
+            std::cout << "Enter first index of SubQueue: ";
+            std::cin >> start;
+            std::cout << "Enter last index of SubQueue: ";
+            std::cin >> end;
+            Queue<complex> test1(arr1, len1);
+            Queue<complex> *test2 = test1.GetSubQueue(start, end);
+            test2->QueueShow();
+            break;
+        }
+        case 22: {
+            int len1, len2;
+            complex a, b;
+            std::cout << "Enter length of the main queue: ";
+            std::cin >> len1;
+            std::cout << "Enter length of the  SubQueue: ";
+            std::cin >> len2;
+            complex *arr1 = new complex[len1];
+            complex *arr2 = new complex[len2];
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the first Queue: " << std::endl;
+                std::cin >> a;
+                arr1[i] = a;
+            }
+            for (int i = 0; i < len2; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the second Queue: " << std::endl;
+                std::cin >> b;
+                arr2[i] = b;
+            }
+            Queue<complex> test1(arr1, len1);
+            Queue<complex> test2(arr2, len2);
+            bool result = test1.IsSubSequenceHere(test2);
+            if (result)
+            {
+                std::cout << "It`s here!!!";
+            }
+            else
+            {
+                std::cout << "It`s not here(((";
+            }
+            std::cout << std::endl;
+            break;
+        }
+        case 23: {
+            int len1, len2;
+            Person a, b;
+            std::cout << "Enter length of the first queue: ";
+            std::cin >> len1;
+            std::cout << "Enter length of the second queue: ";
+            std::cin >> len2;
+            Person *arr1 = new Person[len1];
+            Person *arr2 = new Person[len2];
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the first queue: " << std::endl;
+                std::cin >> a;
+                arr1[i] = a;
+            }
+            for (int i = 0; i < len2; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the second queue: " << std::endl;
+                std::cin >> b;
+                arr2[i] = b;
+            }
+            Queue<Person> test1(arr1, len1);
+            Queue<Person> test2(arr2, len2);
+            Queue<Person> *testResult = test1.Concat(test2);
+            testResult->QueueShow();
+            break;
+        }
+        case 24: {
+            int len1;
+            Person a;
+            int start, end;
+            std::cout << "Enter length of queue: ";
+            std::cin >> len1;
+            Person *arr1 = new Person[len1];
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of queue: " << std::endl;
+                std::cin >> a;
+                arr1[i] = a;
+            }
+            std::cout << "Enter first index of SubQueue: ";
+            std::cin >> start;
+            std::cout << "Enter last index of SubQueue: ";
+            std::cin >> end;
+            Queue<Person> test1(arr1, len1);
+            Queue<Person> *test2 = test1.GetSubQueue(start, end);
+            test2->QueueShow();
+            break;
+        }
+        case 25: {
+            int len1, len2;
+            Person a, b;
+            std::cout << "Enter length of the main queue: ";
+            std::cin >> len1;
+            std::cout << "Enter length of the  SubQueue: ";
+            std::cin >> len2;
+            Person *arr1 = new Person[len1];
+            Person *arr2 = new Person[len2];
+            for (int i = 0; i < len1; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the main queue: " << std::endl;
+                std::cin >> a;
+                arr1[i] = a;
+            }
+            for (int i = 0; i < len2; i++)
+            {
+                std::cout << "Enter " << i + 1 << " element of the SubQueue: " << std::endl;
+                std::cin >> b;
+                arr2[i] = b;
+            }
+            Queue<Person> test1(arr1, len1);
+            Queue<Person> test2(arr2, len2);
+            bool result = test1.IsSubSequenceHere(test2);
+            if (result)
+            {
+                std::cout << "It`s here!!!";
+            }
+            else
+            {
+                std::cout << "It`s not here(((";
+            }
+            std::cout << std::endl;
+            break;
+        }
+        case 26:
             flag = 0;
             break;
         default:
@@ -2096,7 +2357,16 @@ int main(int argc, const char *argv[])
         std::cout << "14. Use Concat for Stack of Person\n";
         std::cout << "15. Use SubStack for Stack of Person\n";
         std::cout << "16. Use IsSuqSequenceHere for Stack of Person\n";
-        std::cout << "17. Stop programm\n";
+        std::cout << "17. Use Concat for Queue of int\n";
+        std::cout << "18. Use SubStack for Queue of int\n";
+        std::cout << "19. Use IsSuqSequenceHere for Queue of int\n";
+        std::cout << "20. Use Concat for Queue of complex\n";
+        std::cout << "21. Use SubStack for Queue of complex\n";
+        std::cout << "22. Use IsSuqSequenceHere for Queue of complex\n";
+        std::cout << "23. Use Concat for Queue of Person\n";
+        std::cout << "24. Use SubStack for Queue of Person\n";
+        std::cout << "25. Use IsSuqSequenceHere for Queue of Person\n";
+        std::cout << "26. Stop programm\n";
     }
     return 0;
 }
