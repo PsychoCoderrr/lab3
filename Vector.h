@@ -20,21 +20,19 @@ template <typename T> class Vector
 
     Vector(const Sequence<T> &seq)
     {
-        this->elements = new DynamicArray<T>(seq.GetLength());
+        this->elements = new DynamicArray<T>();
         for (int i = 0; i < seq.GetLength(); i++)
         {
-            this->elements->Set(seq.Get(i), i);
-            this->elements->Resize(this->GetLength() - 1);
+            this->elements->Append(seq.Get(i), i);
         }
     }
 
     Vector(const Vector<T> &vec)
     {
-        this->elements = new DynamicArray<T>(vec.GetLength());
+        this->elements = new DynamicArray<T>();
         for (int i = 0; i < vec.GetLength(); i++)
         {
-            this->elements->Set(vec.Get(i), i);
-            this->elements->Resize(this->GetLength() - 1);
+            this->elements->Append(vec.Get(i), i);
         }
     }
 
@@ -121,6 +119,11 @@ template <typename T> class Vector
     {
         Vector<T>* vecRes = this->vectorMultiOnScalar(item);
         return vecRes;
+    }
+    
+    T operator[](int index)
+    {
+        return this->Get(index);
     }
 };
 
