@@ -242,7 +242,7 @@ int main(int argc, const char *argv[])
             Stack<int> test1(arr1, len1);
             Stack<int> test2(arr2, len2);
             Stack<int> *testResult = test1.Concat(test2);
-            testResult->StackShow();
+            StackShow(testResult);
             break;
         }
         case 9: {
@@ -264,7 +264,7 @@ int main(int argc, const char *argv[])
             std::cin >> end;
             Stack<int> test1(arr1, len1);
             Stack<int> *test2 = test1.GetSubStack(start, end);
-            test2->StackShow();
+            StackShow(test2);
             break;
         }
         case 10: {
@@ -326,7 +326,7 @@ int main(int argc, const char *argv[])
             Stack<complex> test1(arr1, len1);
             Stack<complex> test2(arr2, len2);
             Stack<complex> *testResult = test1.Concat(test2);
-            testResult->StackShow();
+            StackShow(testResult);
             break;
         }
         case 12: {
@@ -348,7 +348,7 @@ int main(int argc, const char *argv[])
             std::cin >> end;
             Stack<complex> test1(arr1, len1);
             Stack<complex> *test2 = test1.GetSubStack(start, end);
-            test2->StackShow();
+            StackShow(test2);
             break;
         }
         case 13: {
@@ -410,7 +410,7 @@ int main(int argc, const char *argv[])
             Stack<Person> test1(arr1, len1);
             Stack<Person> test2(arr2, len2);
             Stack<Person> *testResult = test1.Concat(test2);
-            testResult->StackShow();
+            StackShow(testResult);
             break;
         }
         case 15: {
@@ -432,7 +432,7 @@ int main(int argc, const char *argv[])
             std::cin >> end;
             Stack<Person> test1(arr1, len1);
             Stack<Person> *test2 = test1.GetSubStack(start, end);
-            test2->StackShow();
+            StackShow(test2);
             break;
         }
         case 16: {
@@ -494,7 +494,7 @@ int main(int argc, const char *argv[])
             Queue<int> test1(arr1, len1);
             Queue<int> test2(arr2, len2);
             Queue<int> *testResult = test1.Concat(test2);
-            testResult->QueueShow();
+            QueueShow(testResult);
             break;
         }
         case 18: {
@@ -516,7 +516,7 @@ int main(int argc, const char *argv[])
             std::cin >> end;
             Queue<int> test1(arr1, len1);
             Queue<int> *test2 = test1.GetSubQueue(start, end);
-            test2->QueueShow();
+            QueueShow(test2);
             break;
         }
         case 19: {
@@ -578,7 +578,7 @@ int main(int argc, const char *argv[])
             Queue<complex> test1(arr1, len1);
             Queue<complex> test2(arr2, len2);
             Queue<complex> *testResult = test1.Concat(test2);
-            testResult->QueueShow();
+            QueueShow(testResult);
             break;
         }
         case 21: {
@@ -600,7 +600,7 @@ int main(int argc, const char *argv[])
             std::cin >> end;
             Queue<complex> test1(arr1, len1);
             Queue<complex> *test2 = test1.GetSubQueue(start, end);
-            test2->QueueShow();
+            QueueShow(test2);
             break;
         }
         case 22: {
@@ -662,7 +662,7 @@ int main(int argc, const char *argv[])
             Queue<Person> test1(arr1, len1);
             Queue<Person> test2(arr2, len2);
             Queue<Person> *testResult = test1.Concat(test2);
-            testResult->QueueShow();
+            QueueShow(testResult);
             break;
         }
         case 24: {
@@ -684,7 +684,7 @@ int main(int argc, const char *argv[])
             std::cin >> end;
             Queue<Person> test1(arr1, len1);
             Queue<Person> *test2 = test1.GetSubQueue(start, end);
-            test2->QueueShow();
+            QueueShow(test2);
             break;
         }
         case 25: {

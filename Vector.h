@@ -18,7 +18,7 @@ template <typename T> class Vector
         this->elements = new DynamicArray<T>(items, count);
     }
 
-    Vector(Sequence<T> &seq)
+    Vector(const Sequence<T> &seq)
     {
         this->elements = new DynamicArray<T>(seq.GetLength());
         for (int i = 0; i < seq.GetLength(); i++)
@@ -28,7 +28,7 @@ template <typename T> class Vector
         }
     }
 
-    Vector(Vector<T> &vec)
+    Vector(const Vector<T> &vec)
     {
         this->elements = new DynamicArray<T>(vec.GetLength());
         for (int i = 0; i < vec.GetLength(); i++)

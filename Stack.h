@@ -48,15 +48,6 @@ template <typename T> class Stack
         return elements->Get(index);
     }
 
-    void StackShow()
-    {
-        for (int i = 0; i < this->GetSize(); i++)
-        {
-            std::cout << this->ShowElement(i) << " ";
-        }
-        std::cout << std::endl;
-    }
-
     bool IsStackEmpty()
     {
         if (this->GetSize() <= 0)
@@ -123,3 +114,22 @@ template <typename T> class Stack
     }
 };
 
+template <typename T>
+void StackShow(Stack<T>& stack)
+{
+    for (int i = 0; i < stack.GetSize(); i++)
+    {
+        std::cout << stack.ShowElement(i) << " ";
+    }
+    std::cout<< std::endl;
+}
+
+template <typename T>
+void StackShow(Stack<T>* stack)
+{
+    for (int i = 0; i < stack->GetSize(); i++)
+    {
+        std::cout << stack->ShowElement(i) << " ";
+    }
+    std::cout<< std::endl;
+}

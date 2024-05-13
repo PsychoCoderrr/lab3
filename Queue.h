@@ -17,7 +17,7 @@ template <typename T> class Queue
         elements = new MutableListSequence<T>(array, count);
     }
 
-    Queue(Queue<T> &QueueForCopy)
+    Queue(const Queue<T> &QueueForCopy)
     {
         elements = new MutableListSequence<T>();
         for (int i = 0; i < QueueForCopy.elements->GetLength(); i++)
@@ -48,17 +48,9 @@ template <typename T> class Queue
         return elements->GetLength();
     }
 
-    T ShowElement(int index)
+    T ShowElement(int index)//Peek
     {
         return elements->Get(index);
-    }
-
-    void QueueShow()
-    {
-        for (int i = 0; i < this->GetSize(); i++)
-        {
-            std::cout << this->ShowElement(i) << std::endl;
-        }
     }
 
     bool IsSubSequenceHere(Queue<T> queue)
@@ -109,3 +101,23 @@ template <typename T> class Queue
         return resultQueue;
     }
 };
+
+template <typename T>
+void QueueShow(Queue<T>& que)
+{
+    for (int i = 0; i < que.GetSize(); i++)
+    {
+        std::cout << que.ShowElement(i) << " ";
+    }
+    std::cout<< std::endl;
+}
+
+template <typename T>
+void QueueShow(Queue<T>* que)
+{
+    for (int i = 0; i < que->GetSize(); i++)
+    {
+        std::cout << que->ShowElement(i) << " ";
+    }
+    std::cout<< std::endl;
+}
