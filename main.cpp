@@ -73,7 +73,7 @@ int main(int argc, const char *argv[])
             }
             Vector<int> test1(arr1, len1);
             Vector<int> test2(arr2, len2);
-            Vector<int> *test3 = test1.vectorSum(test2);
+            Vector<int> *test3 = test1 + test2;
             std::cout << "Vector Result: ";
             for (int i = 0; i < len1; i++)
             {
@@ -110,7 +110,7 @@ int main(int argc, const char *argv[])
             }
             Vector<int> test1(arr1, len1);
             Vector<int> test2(arr2, len2);
-            Vector<int> *test3 = test1.vectorMulti(test2);
+            Vector<int> *test3 = test1 * test2;
             std::cout << "Vector Result: ";
             for (int i = 0; i < len1; i++)
             {
@@ -135,7 +135,7 @@ int main(int argc, const char *argv[])
             int scalar;
             std::cout << "Enter scalar: ";
             std::cin >> scalar;
-            Vector<int> *test2 = test1.vectorMultiOnScalar(scalar);
+            Vector<int> *test2 = test1 * scalar;
             std::cout << "Vector Result: ";
             for (int i = 0; i < len1; i++)
             {

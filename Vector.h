@@ -104,5 +104,23 @@ template <typename T> class Vector
     {
         delete elements;
     }
+    
+    Vector<T>* operator+(Vector<T>& vec)
+    {
+        Vector<T>* vecRes = this->vectorSum(vec);
+        return vecRes;
+    }
+    
+    Vector<T>* operator*(Vector<T>& vec)
+    {
+        Vector<T>* vecRes = this->vectorMulti(vec);
+        return vecRes;
+    }
+    
+    Vector<T>* operator*(const T item)
+    {
+        Vector<T>* vecRes = this->vectorMultiOnScalar(item);
+        return vecRes;
+    }
 };
 
