@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include "ListSequence.h"
 
 template <typename T> class Queue
@@ -48,7 +49,7 @@ template <typename T> class Queue
         return elements->GetLength();
     }
 
-    T Peek(int index)//Peek
+    T Peek(int index) // Peek
     {
         return elements->Get(index);
     }
@@ -102,22 +103,20 @@ template <typename T> class Queue
     }
 };
 
-template <typename T>
-void QueueShow(Queue<T>& que)
+template <typename T> void QueueShow(Queue<T> &que)
 {
     for (int i = 0; i < que.GetSize(); i++)
     {
         std::cout << que.Peek(i) << " ";
     }
-    std::cout<< std::endl;
+    std::cout << std::endl;
 }
 
-template <typename T>
-void QueueShow(Queue<T>* que)
+template <typename T> void QueueShow(Queue<T> *que)
 {
     for (int i = 0; i < que->GetSize(); i++)
     {
         std::cout << que->Peek(i) << " ";
     }
-    std::cout<< std::endl;
+    std::cout << std::endl;
 }

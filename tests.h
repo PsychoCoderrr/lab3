@@ -1,15 +1,16 @@
 #pragma once
-#include "assert.h"
 #include <iostream>
-#include <compare>
 #include "Complex.h"
-#include "Vector.h"
-#include "Stack.h"
-#include "Queue.h"
+#include "DynamicArray.h"
 #include "LinkedList.h"
 #include "ListSequence.h"
 #include "Person.h"
-#include "DynamicArray.h"
+#include "Queue.h"
+#include "Stack.h"
+#include "Vector.h"
+#include "assert.h"
+#include <compare>
+
 
 void TestVectorSum()
 {
@@ -523,4 +524,3 @@ void TestForComplex()
     TestComplexMulti();
     TestComplexDiv();
 }
-

@@ -1,4 +1,5 @@
 #pragma once
+#include<iostream>
 #include "LinkedList.h"
 #include "Sequence.h"
 
@@ -137,4 +138,3 @@ template <typename T> class MutableListSequence : public ListSequence<T>
         return result;
     }
 };
-

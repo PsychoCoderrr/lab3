@@ -1,4 +1,5 @@
 #pragma once
+#include<iostream>
 #include "ListSequence.h"
 
 template <typename T> class Stack
@@ -114,22 +115,20 @@ template <typename T> class Stack
     }
 };
 
-template <typename T>
-void StackShow(Stack<T>& stack)
+template <typename T> void StackShow(Stack<T> &stack)
 {
     for (int i = 0; i < stack.GetSize(); i++)
     {
         std::cout << stack.ShowElement(i) << " ";
     }
-    std::cout<< std::endl;
+    std::cout << std::endl;
 }
 
-template <typename T>
-void StackShow(Stack<T>* stack)
+template <typename T> void StackShow(Stack<T> *stack)
 {
     for (int i = 0; i < stack->GetSize(); i++)
     {
         std::cout << stack->Peek(i) << " ";
     }
-    std::cout<< std::endl;
+    std::cout << std::endl;
 }

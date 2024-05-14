@@ -1,7 +1,8 @@
 #pragma once
+#include <iostream>
 #include "DynamicArray.h"
-#include "Sequence.h"
 #include "LinkedList.h"
+#include "Sequence.h"
 template <typename T> class Vector
 {
   private:
@@ -102,48 +103,45 @@ template <typename T> class Vector
     {
         delete elements;
     }
-    
-    Vector<T>* operator+(Vector<T>& vec)
+
+    Vector<T> *operator+(Vector<T> &vec)
     {
-        Vector<T>* vecRes = this->vectorSum(vec);
+        Vector<T> *vecRes = this->vectorSum(vec);
         return vecRes;
     }
-    
-    Vector<T>* operator*(Vector<T>& vec)
+
+    Vector<T> *operator*(Vector<T> &vec)
     {
-        Vector<T>* vecRes = this->vectorMulti(vec);
+        Vector<T> *vecRes = this->vectorMulti(vec);
         return vecRes;
     }
-    
-    Vector<T>* operator*(const T item)
+
+    Vector<T> *operator*(const T item)
     {
-        Vector<T>* vecRes = this->vectorMultiOnScalar(item);
+        Vector<T> *vecRes = this->vectorMultiOnScalar(item);
         return vecRes;
     }
-    
+
     T operator[](int index)
     {
         return this->Get(index);
     }
 };
 
-template <typename T>
-void VectorShow(Vector<T>& vec)
+template <typename T> void VectorShow(Vector<T> &vec)
 {
     for (int i = 0; i < vec.GetLength(); i++)
     {
-        std::cout<< vec.Get(i) << " ";
+        std::cout << vec.Get(i) << " ";
     }
     std::cout << std::endl;
 }
 
-template <typename T>
-void VectorShow(Vector<T>* vec)
+template <typename T> void VectorShow(Vector<T> *vec)
 {
     for (int i = 0; i < vec->GetLength(); i++)
     {
-        std::cout<< vec->Get(i) << " ";
+        std::cout << vec->Get(i) << " ";
     }
     std::cout << std::endl;
 }
-

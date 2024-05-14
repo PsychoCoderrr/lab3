@@ -1,11 +1,12 @@
 #include <iostream>
-#include "Vector.h"
-#include "Stack.h"
-#include "Queue.h"
 #include "Complex.h"
-#include "tests.h"
 #include "Person.h"
+#include "Queue.h"
+#include "Stack.h"
 #include "UiPrint.h"
+#include "Vector.h"
+#include "tests.h"
+
 
 int main(int argc, const char *argv[])
 {

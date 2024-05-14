@@ -1,5 +1,5 @@
 #pragma once
-
+#include<iostream>
 class complex
 {
   private:
@@ -150,4 +150,3 @@ class complex
         }
     }
 };
-
