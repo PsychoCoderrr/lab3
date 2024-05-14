@@ -43,7 +43,7 @@ template <typename T> class Stack
         return result;
     }
 
-    T ShowElement(int index)
+    T Peek(int index)
     {
         return elements->Get(index);
     }
@@ -74,7 +74,7 @@ template <typename T> class Stack
             j = 0;
             while (j < stack.GetSize() && flag == true)
             {
-                if (this->ShowElement(i + j) == stack.ShowElement(j))
+                if (this->Peek(i + j) == stack.Peek(j))
                 {
                     flag = true;
                 }
@@ -101,7 +101,7 @@ template <typename T> class Stack
     {
         for (int i = 0; i < stack.GetSize(); i++)
         {
-            elements->Append(stack.ShowElement(i));
+            elements->Append(stack.Peek(i));
         }
         return this;
     }
@@ -129,7 +129,7 @@ void StackShow(Stack<T>* stack)
 {
     for (int i = 0; i < stack->GetSize(); i++)
     {
-        std::cout << stack->ShowElement(i) << " ";
+        std::cout << stack->Peek(i) << " ";
     }
     std::cout<< std::endl;
 }
