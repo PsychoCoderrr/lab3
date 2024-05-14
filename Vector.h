@@ -20,19 +20,19 @@ template <typename T> class Vector
 
     Vector(const Sequence<T> &seq)
     {
-        this->elements = new DynamicArray<T>();
+        this->elements = new DynamicArray<T>(seq.GetLength());
         for (int i = 0; i < seq.GetLength(); i++)
         {
-            this->elements->Append(seq.Get(i), i);
+            this->elements->Set(seq.Get(i), i);
         }
     }
 
     Vector(const Vector<T> &vec)
     {
-        this->elements = new DynamicArray<T>();
+        this->elements = new DynamicArray<T>(vec.GetLength());
         for (int i = 0; i < vec.GetLength(); i++)
         {
-            this->elements->Append(vec.Get(i), i);
+            this->elements->Set(vec.Get(i), i);
         }
     }
 

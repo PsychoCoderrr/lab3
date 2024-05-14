@@ -86,11 +86,6 @@ template <typename T> class DynamicArray
         {
             throw std::out_of_range("invalid argument");
         }
-        Resize(size + 1);
-        for (int i = size; i > index; i--)
-        {
-            elements[i] = elements[i - 1];
-        }
         elements[index] = value;
     }
 
