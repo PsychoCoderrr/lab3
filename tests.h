@@ -184,13 +184,13 @@ void TestQueueCostructors()
     assert(test1.GetSize() == 4);
     for (int i = 0; i < test1.GetSize(); i++)
     {
-        assert(test1.ShowElement(i) == a[i]);
+        assert(test1.Peek(i) == a[i]);
     }
 
     Queue<int> test2(test1);
     for (int i = 0; i < test1.GetSize(); i++)
     {
-        assert(test1.ShowElement(i) == test2.ShowElement(i));
+        assert(test1.Peek(i) == test2.Peek(i));
     }
 }
 
@@ -204,7 +204,7 @@ void TestQueuePush()
     assert(test->GetSize() == 5);
     for (int i = 0; i < test->GetSize(); i++)
     {
-        assert(test->ShowElement(i) == b[i]);
+        assert(test->Peek(i) == b[i]);
     }
 }
 
@@ -240,7 +240,7 @@ void TestQueueGetSubStack()
     Queue<int> *test2 = test1.GetSubQueue(1, 5);
     for (int i = 0; i < test2->GetSize(); i++)
     {
-        assert(test2->ShowElement(i) == b[i]);
+        assert(test2->Peek(i) == b[i]);
     }
 }
 
@@ -257,7 +257,7 @@ void TestQueueConcat()
     assert(test3->GetSize() == 8);
     for (int i = 0; i < test3->GetSize(); i++)
     {
-        assert(test3->ShowElement(i) == ab[i]);
+        assert(test3->Peek(i) == ab[i]);
     }
 }
 

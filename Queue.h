@@ -48,7 +48,7 @@ template <typename T> class Queue
         return elements->GetLength();
     }
 
-    T ShowElement(int index)//Peek
+    T Peek(int index)//Peek
     {
         return elements->Get(index);
     }
@@ -67,7 +67,7 @@ template <typename T> class Queue
             j = 0;
             while (j < queue.GetSize() && flag == true)
             {
-                if (this->ShowElement(i + j) == queue.ShowElement(j))
+                if (this->Peek(i + j) == queue.Peek(j))
                 {
                     flag = true;
                 }
@@ -89,7 +89,7 @@ template <typename T> class Queue
     {
         for (int i = 0; i < queue.GetSize(); i++)
         {
-            elements->Append(queue.ShowElement(i));
+            elements->Append(queue.Peek(i));
         }
         return this;
     }
@@ -107,7 +107,7 @@ void QueueShow(Queue<T>& que)
 {
     for (int i = 0; i < que.GetSize(); i++)
     {
-        std::cout << que.ShowElement(i) << " ";
+        std::cout << que.Peek(i) << " ";
     }
     std::cout<< std::endl;
 }
@@ -117,7 +117,7 @@ void QueueShow(Queue<T>* que)
 {
     for (int i = 0; i < que->GetSize(); i++)
     {
-        std::cout << que->ShowElement(i) << " ";
+        std::cout << que->Peek(i) << " ";
     }
     std::cout<< std::endl;
 }
