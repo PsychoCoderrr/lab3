@@ -209,7 +209,7 @@ int main(int argc, const char *argv[])
             }
             Vector<complex> test1(arr1, len1);
             Vector<complex> test2(arr2, len2);
-            Vector<complex> *test3 = test1.vectorMulti(test2);
+            Vector<complex> *test3 = test1 * test2;
             std::cout << "Vector Result: \n";
             for (int i = 0; i < len1; i++)
             {
