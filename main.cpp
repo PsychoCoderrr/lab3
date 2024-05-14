@@ -75,11 +75,7 @@ int main(int argc, const char *argv[])
             Vector<int> test2(arr2, len2);
             Vector<int> *test3 = test1 + test2;
             std::cout << "Vector Result: ";
-            for (int i = 0; i < len1; i++)
-            {
-                std::cout << test3->Get(i) << " ";
-            }
-            std::cout << std::endl;
+            VectorShow(test3);
             break;
         }
         case 4: {
@@ -112,11 +108,7 @@ int main(int argc, const char *argv[])
             Vector<int> test2(arr2, len2);
             Vector<int> *test3 = test1 * test2;
             std::cout << "Vector Result: ";
-            for (int i = 0; i < len1; i++)
-            {
-                std::cout << test3->Get(i) << " ";
-            }
-            std::cout << std::endl;
+            VectorShow(test3);
             break;
         }
         case 5: {
@@ -137,11 +129,7 @@ int main(int argc, const char *argv[])
             std::cin >> scalar;
             Vector<int> *test2 = test1 * scalar;
             std::cout << "Vector Result: ";
-            for (int i = 0; i < len1; i++)
-            {
-                std::cout << test2->Get(i) << " ";
-            }
-            std::cout << std::endl;
+            VectorShow(test2);
             break;
         }
         case 6: {
@@ -174,11 +162,7 @@ int main(int argc, const char *argv[])
             Vector<complex> test2(arr2, len2);
             Vector<complex> *test3 = test1 + test2;
             std::cout << "Vector Result: \n";
-            for (int i = 0; i < len1; i++)
-            {
-                std::cout << test3->Get(i) << " ";
-            }
-            std::cout << std::endl;
+            VectorShow(test3);
             break;
         }
         case 7: {
@@ -211,11 +195,7 @@ int main(int argc, const char *argv[])
             Vector<complex> test2(arr2, len2);
             Vector<complex> *test3 = test1 * test2;
             std::cout << "Vector Result: \n";
-            for (int i = 0; i < len1; i++)
-            {
-                std::cout << test3->Get(i) << " ";
-            }
-            std::cout << std::endl;
+            VectorShow(test3);
             break;
         }
         case 8: {

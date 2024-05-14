@@ -127,3 +127,23 @@ template <typename T> class Vector
     }
 };
 
+template <typename T>
+void VectorShow(Vector<T>& vec)
+{
+    for (int i = 0; i < vec.GetLength(); i++)
+    {
+        std::cout<< vec.Get(i) << " ";
+    }
+    std::cout << std::endl;
+}
+
+template <typename T>
+void VectorShow(Vector<T>* vec)
+{
+    for (int i = 0; i < vec->GetLength(); i++)
+    {
+        std::cout<< vec->Get(i) << " ";
+    }
+    std::cout << std::endl;
+}
+
