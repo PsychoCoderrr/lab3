@@ -126,6 +126,12 @@ template <typename T> class Vector
     {
         return this->Get(index);
     }
+    
+    Vector operator=(Vector<T>& vec)
+    {
+        Vector<T> newVec = new Vector<T>(vec);
+        return newVec;
+    }
 };
 
 template <typename T> void VectorShow(Vector<T> &vec)
