@@ -7,7 +7,7 @@
 #include "UiPrint.h"
 #include "Vector.h"
 #include "tests.h"
-
+#include "FuncForUi.h"
 
 int main(int argc, const char *argv[])
 {
@@ -734,14 +734,124 @@ int main(int argc, const char *argv[])
     int flag = 1;
     int status;
     std::string comand;
+    PrintUI();
     while (flag)
     {
         std::cout << "Enter command"<< std::endl;
         std::getline(std::cin, comand);
-        if (comand.compare("Use int vector for sum") == 0)
-        {
-            status = 3;
-        }
+//        if (comand == "Run tests for Vector")
+//        {
+//            status = 0;
+//        }
+//        else if (comand == "Run tests for Stack")
+//        {
+//            status = 1;
+//        }
+//        else if (comand == "Run tests for Queue")
+//        {
+//            status = 2;
+//        }
+//        else if (comand == "Use int vector for sum")
+//        {
+//            status = 3;
+//        }
+//        else if (comand == "Use int vector for multi" )
+//        {
+//            status = 4;
+//        }
+//        else if (comand == "Use int vector for multionscalar" )
+//        {
+//            status = 5;
+//        }
+//        else if (comand == "Use complex vector for sum" )
+//        {
+//            status = 6;
+//        }
+//        else if (comand == "Use complex vector for multi" )
+//        {
+//            status = 7;
+//        }
+//        else if (comand == "Use int stack for concat" )
+//        {
+//            status = 8;
+//        }
+//        else if (comand == "Use int stack for substack" )
+//        {
+//            status = 9;
+//        }
+//        else if (comand == "Use int stack for issubsequencehere" )
+//        {
+//            status = 10;
+//        }
+//        else if (comand == "Use complex stack for concat" )
+//        {
+//            status = 11;
+//        }
+//        else if (comand == "Use complex stack for substack" )
+//        {
+//            status = 12;
+//        }
+//        else if (comand == "Use complex stack for issubsequencehere" )
+//        {
+//            status = 13;
+//        }
+//        else if (comand == "Use person stack for concat" )
+//        {
+//            status = 14;
+//        }
+//        else if (comand == "Use person stack for substack" )
+//        {
+//            status = 15;
+//        }
+//        else if (comand == "Use person stack for issubsequencehere" )
+//        {
+//            status = 16;
+//        }
+//        else if (comand == "Use int queue for concat" )
+//        {
+//            status = 17;
+//        }
+//        else if (comand == "Use int queue for subqueue" )
+//        {
+//            status = 18;
+//        }
+//        else if (comand == "Use int queue for issubsequencehere" )
+//        {
+//            status = 19;
+//        }
+//        else if (comand == "Use complex queue for concat" )
+//        {
+//            status = 20;
+//        }
+//        else if (comand == "Use complex queue for subqueue" )
+//        {
+//            status = 21;
+//        }
+//        else if (comand == "Use complex queue for issubsequencehere" )
+//        {
+//            status = 22;
+//        }
+//        else if (comand == "Use person queue for concat" )
+//        {
+//            status = 23;
+//        }
+//        else if (comand == "Use person vector for sum" )
+//        {
+//            status = 24;
+//        }
+//        else if (comand == "Use person queue for subqueue" )
+//        {
+//            status = 25;
+//        }
+//        else if (comand == "Stop" )
+//        {
+//            status = 26;
+//        }
+//        else
+//        {
+//            status = 27;
+//        }
+        status = getStatus(comand);
         switch (status)
         {
         case 0:
@@ -775,8 +885,10 @@ int main(int argc, const char *argv[])
             int a, b;
             std::cout << "Enter length of the first vector: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter length of the second vector: ";
             std::cin >> len2;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             if (len1 != len2)
             {
                 std::cout << "Diffrent sizes!!!";
@@ -789,12 +901,14 @@ int main(int argc, const char *argv[])
                 std::cout << "Enter " << i + 1 << " element of the first vector: ";
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             for (int i = 0; i < len2; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of the second vector: ";
                 std::cin >> b;
                 arr2[i] = b;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             Vector<int> test1(arr1, len1);
             Vector<int> test2(arr2, len2);
@@ -808,8 +922,10 @@ int main(int argc, const char *argv[])
             int a, b;
             std::cout << "Enter length of the first vector: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter length of the second vector: ";
             std::cin >> len2;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             if (len1 != len2)
             {
                 std::cout << "Diffrent sizes!!!";
@@ -822,12 +938,14 @@ int main(int argc, const char *argv[])
                 std::cout << "Enter " << i + 1 << " element of the first vector: ";
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             for (int i = 0; i < len2; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of the second vector: ";
                 std::cin >> b;
                 arr2[i] = b;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             Vector<int> test1(arr1, len1);
             Vector<int> test2(arr2, len2);
@@ -841,17 +959,20 @@ int main(int argc, const char *argv[])
             int a;
             std::cout << "Enter length of vector: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             int *arr1 = new int[len1];
             for (int i = 0; i < len1; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of the first vector: ";
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             Vector<int> test1(arr1, len1);
             int scalar;
             std::cout << "Enter scalar: ";
             std::cin >> scalar;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             Vector<int> *test2 = test1 * scalar;
             std::cout << "Vector Result: ";
             VectorShow(test2);
@@ -862,8 +983,10 @@ int main(int argc, const char *argv[])
             complex a, b;
             std::cout << "Enter length of the first vector: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter length of the second vector: ";
             std::cin >> len2;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             if (len1 != len2)
             {
                 std::cout << "Diffrent sizes!!!";
@@ -876,12 +999,14 @@ int main(int argc, const char *argv[])
                 std::cout << "Enter " << i + 1 << " element of the first vector: \n";
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             for (int i = 0; i < len2; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of the second vector: \n";
                 std::cin >> b;
                 arr2[i] = b;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             Vector<complex> test1(arr1, len1);
             Vector<complex> test2(arr2, len2);
@@ -895,8 +1020,10 @@ int main(int argc, const char *argv[])
             complex a, b;
             std::cout << "Enter length of the first vector: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter length of the second vector: ";
             std::cin >> len2;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             if (len1 != len2)
             {
                 std::cout << "Diffrent sizes!!!";
@@ -909,12 +1036,14 @@ int main(int argc, const char *argv[])
                 std::cout << "Enter " << i + 1 << " element of the first vector: \n";
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             for (int i = 0; i < len2; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of the second vector: \n";
                 std::cin >> b;
                 arr2[i] = b;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             Vector<complex> test1(arr1, len1);
             Vector<complex> test2(arr2, len2);
@@ -928,8 +1057,10 @@ int main(int argc, const char *argv[])
             int a, b;
             std::cout << "Enter length of the first stack: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter length of the second stack: ";
             std::cin >> len2;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             int *arr1 = new int[len1];
             int *arr2 = new int[len2];
             for (int i = 0; i < len1; i++)
@@ -937,12 +1068,14 @@ int main(int argc, const char *argv[])
                 std::cout << "Enter " << i + 1 << " element of the first stack: ";
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             for (int i = 0; i < len2; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of the second stack: ";
                 std::cin >> b;
                 arr2[i] = b;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             Stack<int> test1(arr1, len1);
             Stack<int> test2(arr2, len2);
@@ -956,17 +1089,21 @@ int main(int argc, const char *argv[])
             int start, end;
             std::cout << "Enter length of stack: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             int *arr1 = new int[len1];
             for (int i = 0; i < len1; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of the first stack: ";
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             std::cout << "Enter first index of SubStack: ";
             std::cin >> start;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter last index of SubStack: ";
             std::cin >> end;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             Stack<int> test1(arr1, len1);
             Stack<int> *test2 = test1.GetSubStack(start, end);
             StackShow(test2);
@@ -977,8 +1114,10 @@ int main(int argc, const char *argv[])
             int a, b;
             std::cout << "Enter length of the main stack: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter length of the  SubStack: ";
             std::cin >> len2;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             int *arr1 = new int[len1];
             int *arr2 = new int[len2];
             for (int i = 0; i < len1; i++)
@@ -986,12 +1125,14 @@ int main(int argc, const char *argv[])
                 std::cout << "Enter " << i + 1 << " element of the main stack: ";
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             for (int i = 0; i < len2; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of the  SubStack: ";
                 std::cin >> b;
                 arr2[i] = b;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             Stack<int> test1(arr1, len1);
             Stack<int> test2(arr2, len2);
@@ -1012,8 +1153,10 @@ int main(int argc, const char *argv[])
             complex a, b;
             std::cout << "Enter length of the first stack: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter length of the second stack: ";
             std::cin >> len2;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             complex *arr1 = new complex[len1];
             complex *arr2 = new complex[len2];
             for (int i = 0; i < len1; i++)
@@ -1021,12 +1164,14 @@ int main(int argc, const char *argv[])
                 std::cout << "Enter " << i + 1 << " element of the first stack: " << std::endl;
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             for (int i = 0; i < len2; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of the second stack: " << std::endl;
                 std::cin >> b;
                 arr2[i] = b;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             Stack<complex> test1(arr1, len1);
             Stack<complex> test2(arr2, len2);
@@ -1040,17 +1185,21 @@ int main(int argc, const char *argv[])
             int start, end;
             std::cout << "Enter length of stack: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             complex *arr1 = new complex[len1];
             for (int i = 0; i < len1; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of the stack: " << std::endl;
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             std::cout << "Enter first index of SubStack: ";
             std::cin >> start;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter last index of SubStack: ";
             std::cin >> end;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             Stack<complex> test1(arr1, len1);
             Stack<complex> *test2 = test1.GetSubStack(start, end);
             StackShow(test2);
@@ -1061,8 +1210,10 @@ int main(int argc, const char *argv[])
             complex a, b;
             std::cout << "Enter length of the main stack: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter length of the  SubStack: ";
             std::cin >> len2;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             complex *arr1 = new complex[len1];
             complex *arr2 = new complex[len2];
             for (int i = 0; i < len1; i++)
@@ -1070,12 +1221,14 @@ int main(int argc, const char *argv[])
                 std::cout << "Enter " << i + 1 << " element of the first stack: " << std::endl;
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             for (int i = 0; i < len2; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of the second stack: " << std::endl;
                 std::cin >> b;
                 arr2[i] = b;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             Stack<complex> test1(arr1, len1);
             Stack<complex> test2(arr2, len2);
@@ -1096,8 +1249,10 @@ int main(int argc, const char *argv[])
             Person a, b;
             std::cout << "Enter length of the first stack: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter length of the second stack: ";
             std::cin >> len2;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             Person *arr1 = new Person[len1];
             Person *arr2 = new Person[len2];
             for (int i = 0; i < len1; i++)
@@ -1105,12 +1260,14 @@ int main(int argc, const char *argv[])
                 std::cout << "Enter " << i + 1 << " element of the first stack: " << std::endl;
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             for (int i = 0; i < len2; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of the second stack: " << std::endl;
                 std::cin >> b;
                 arr2[i] = b;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             Stack<Person> test1(arr1, len1);
             Stack<Person> test2(arr2, len2);
@@ -1124,17 +1281,21 @@ int main(int argc, const char *argv[])
             int start, end;
             std::cout << "Enter length of stack: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             Person *arr1 = new Person[len1];
             for (int i = 0; i < len1; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of stack: " << std::endl;
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             std::cout << "Enter first index of SubStack: ";
             std::cin >> start;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter last index of SubStack: ";
             std::cin >> end;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             Stack<Person> test1(arr1, len1);
             Stack<Person> *test2 = test1.GetSubStack(start, end);
             StackShow(test2);
@@ -1145,8 +1306,10 @@ int main(int argc, const char *argv[])
             Person a, b;
             std::cout << "Enter length of the main stack: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter length of the  SubStack: ";
             std::cin >> len2;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             Person *arr1 = new Person[len1];
             Person *arr2 = new Person[len2];
             for (int i = 0; i < len1; i++)
@@ -1154,12 +1317,14 @@ int main(int argc, const char *argv[])
                 std::cout << "Enter " << i + 1 << " element of the main stack: " << std::endl;
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             for (int i = 0; i < len2; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of the SubStack: " << std::endl;
                 std::cin >> b;
                 arr2[i] = b;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             Stack<Person> test1(arr1, len1);
             Stack<Person> test2(arr2, len2);
@@ -1180,8 +1345,10 @@ int main(int argc, const char *argv[])
             int a, b;
             std::cout << "Enter length of the first queue: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter length of the second queue: ";
             std::cin >> len2;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             int *arr1 = new int[len1];
             int *arr2 = new int[len2];
             for (int i = 0; i < len1; i++)
@@ -1189,12 +1356,14 @@ int main(int argc, const char *argv[])
                 std::cout << "Enter " << i + 1 << " element of the first queue: ";
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             for (int i = 0; i < len2; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of the second queue: ";
                 std::cin >> b;
                 arr2[i] = b;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             Queue<int> test1(arr1, len1);
             Queue<int> test2(arr2, len2);
@@ -1208,17 +1377,21 @@ int main(int argc, const char *argv[])
             int start, end;
             std::cout << "Enter length of queue: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             int *arr1 = new int[len1];
             for (int i = 0; i < len1; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of the first queue: ";
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             std::cout << "Enter first index of SubQueue: ";
             std::cin >> start;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter last index of SubQueue: ";
             std::cin >> end;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             Queue<int> test1(arr1, len1);
             Queue<int> *test2 = test1.GetSubQueue(start, end);
             QueueShow(test2);
@@ -1229,8 +1402,10 @@ int main(int argc, const char *argv[])
             int a, b;
             std::cout << "Enter length of the main queue: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter length of the  SubQueue: ";
             std::cin >> len2;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             int *arr1 = new int[len1];
             int *arr2 = new int[len2];
             for (int i = 0; i < len1; i++)
@@ -1238,12 +1413,14 @@ int main(int argc, const char *argv[])
                 std::cout << "Enter " << i + 1 << " element of the main queue: ";
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             for (int i = 0; i < len2; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of the  SubQueue: ";
                 std::cin >> b;
                 arr2[i] = b;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             Queue<int> test1(arr1, len1);
             Queue<int> test2(arr2, len2);
@@ -1264,8 +1441,10 @@ int main(int argc, const char *argv[])
             complex a, b;
             std::cout << "Enter length of the first queue: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter length of the second queue: ";
             std::cin >> len2;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             complex *arr1 = new complex[len1];
             complex *arr2 = new complex[len2];
             for (int i = 0; i < len1; i++)
@@ -1273,12 +1452,14 @@ int main(int argc, const char *argv[])
                 std::cout << "Enter " << i + 1 << " element of the first queue: " << std::endl;
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             for (int i = 0; i < len2; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of the second queue: " << std::endl;
                 std::cin >> b;
                 arr2[i] = b;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             Queue<complex> test1(arr1, len1);
             Queue<complex> test2(arr2, len2);
@@ -1292,17 +1473,21 @@ int main(int argc, const char *argv[])
             int start, end;
             std::cout << "Enter length of queue: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             complex *arr1 = new complex[len1];
             for (int i = 0; i < len1; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of the queue: " << std::endl;
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             std::cout << "Enter first index of SubQueue: ";
             std::cin >> start;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter last index of SubQueue: ";
             std::cin >> end;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             Queue<complex> test1(arr1, len1);
             Queue<complex> *test2 = test1.GetSubQueue(start, end);
             QueueShow(test2);
@@ -1313,8 +1498,10 @@ int main(int argc, const char *argv[])
             complex a, b;
             std::cout << "Enter length of the main queue: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter length of the  SubQueue: ";
             std::cin >> len2;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             complex *arr1 = new complex[len1];
             complex *arr2 = new complex[len2];
             for (int i = 0; i < len1; i++)
@@ -1322,12 +1509,14 @@ int main(int argc, const char *argv[])
                 std::cout << "Enter " << i + 1 << " element of the first Queue: " << std::endl;
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             for (int i = 0; i < len2; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of the second Queue: " << std::endl;
                 std::cin >> b;
                 arr2[i] = b;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             Queue<complex> test1(arr1, len1);
             Queue<complex> test2(arr2, len2);
@@ -1348,8 +1537,10 @@ int main(int argc, const char *argv[])
             Person a, b;
             std::cout << "Enter length of the first queue: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter length of the second queue: ";
             std::cin >> len2;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             Person *arr1 = new Person[len1];
             Person *arr2 = new Person[len2];
             for (int i = 0; i < len1; i++)
@@ -1357,12 +1548,14 @@ int main(int argc, const char *argv[])
                 std::cout << "Enter " << i + 1 << " element of the first queue: " << std::endl;
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             for (int i = 0; i < len2; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of the second queue: " << std::endl;
                 std::cin >> b;
                 arr2[i] = b;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             Queue<Person> test1(arr1, len1);
             Queue<Person> test2(arr2, len2);
@@ -1376,17 +1569,21 @@ int main(int argc, const char *argv[])
             int start, end;
             std::cout << "Enter length of queue: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             Person *arr1 = new Person[len1];
             for (int i = 0; i < len1; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of queue: " << std::endl;
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             std::cout << "Enter first index of SubQueue: ";
             std::cin >> start;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter last index of SubQueue: ";
             std::cin >> end;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             Queue<Person> test1(arr1, len1);
             Queue<Person> *test2 = test1.GetSubQueue(start, end);
             QueueShow(test2);
@@ -1397,8 +1594,10 @@ int main(int argc, const char *argv[])
             Person a, b;
             std::cout << "Enter length of the main queue: ";
             std::cin >> len1;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Enter length of the  SubQueue: ";
             std::cin >> len2;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             Person *arr1 = new Person[len1];
             Person *arr2 = new Person[len2];
             for (int i = 0; i < len1; i++)
@@ -1406,12 +1605,14 @@ int main(int argc, const char *argv[])
                 std::cout << "Enter " << i + 1 << " element of the main queue: " << std::endl;
                 std::cin >> a;
                 arr1[i] = a;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             for (int i = 0; i < len2; i++)
             {
                 std::cout << "Enter " << i + 1 << " element of the SubQueue: " << std::endl;
                 std::cin >> b;
                 arr2[i] = b;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             Queue<Person> test1(arr1, len1);
             Queue<Person> test2(arr2, len2);
