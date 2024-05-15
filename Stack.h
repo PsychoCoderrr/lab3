@@ -18,7 +18,7 @@ template <typename T> class Stack
         elements = new MutableListSequence<T>(array, count);
     }
 
-    Stack(Stack<T> &StackForCopy)
+    Stack(const Stack<T> &StackForCopy)
     {
         elements = new MutableListSequence<T>();
         for (int i = 0; i < StackForCopy.elements->GetLength(); i++)

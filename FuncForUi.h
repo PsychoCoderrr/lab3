@@ -2,15 +2,15 @@
 #include <iostream>
 int getStatus(std::string& comand)
 {
-    if (comand == "Run tests for Vector")
+    if (comand == "Run tests for vector")
     {
         return 0;
     }
-    else if (comand == "Run tests for Stack")
+    else if (comand == "Run tests for stack")
     {
         return 1;
     }
-    else if (comand == "Run tests for Queue")
+    else if (comand == "Run tests for queue")
     {
         return 2;
     }
